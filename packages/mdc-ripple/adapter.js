@@ -37,7 +37,7 @@
  *
  * @record
  */
-export default class MDCRippleAdapter {
+class MDCRippleAdapter {
 
   /** @return {boolean} */
   browserSupportsCssVars() {}
@@ -92,3 +92,5 @@ export default class MDCRippleAdapter {
   getWindowPageOffset() {}
 
 }
+
+export default MDCRippleAdapter;

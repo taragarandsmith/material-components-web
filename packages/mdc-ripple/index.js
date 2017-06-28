@@ -19,13 +19,10 @@ import MDCRippleAdapter from './adapter';
 import MDCRippleFoundation from './foundation';
 import * as util from './util';
 
-export {MDCRippleFoundation};
-export {util};
-
 /**
  * @extends MDCComponent<!MDCRippleFoundation>
  */
-export class MDCRipple extends MDCComponent {
+class MDCRipple extends MDCComponent {
   /** @param {...?} args */
   constructor(...args) {
     super(...args);
@@ -114,3 +111,5 @@ export class MDCRipple extends MDCComponent {
     this.unbounded = 'mdcRippleIsUnbounded' in this.root_.dataset;
   }
 }
+
+export {MDCRipple, MDCRippleFoundation, util};

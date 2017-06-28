@@ -21,7 +21,7 @@ let supportsPassive_;
  * @param {!Window} windowObj
  * @return {boolean|undefined}
  */
-export function supportsCssVariables(windowObj) {
+function supportsCssVariables(windowObj) {
   const supportsFunctionPresent = windowObj.CSS && typeof windowObj.CSS.supports === 'function';
   if (!supportsFunctionPresent) {
     return;
@@ -44,7 +44,7 @@ export function supportsCssVariables(windowObj) {
  * @param {boolean=} forceRefresh
  * @return {boolean|{passive: boolean}}
  */
-export function applyPassive(globalObj = window, forceRefresh = false) {
+function applyPassive(globalObj = window, forceRefresh = false) {
   if (supportsPassive_ === undefined || forceRefresh) {
     let isSupported = false;
     try {
@@ -63,7 +63,7 @@ export function applyPassive(globalObj = window, forceRefresh = false) {
  * @param {!Object} HTMLElementPrototype
  * @return {!Array<string>}
  */
-export function getMatchesProperty(HTMLElementPrototype) {
+function getMatchesProperty(HTMLElementPrototype) {
   return [
     'webkitMatchesSelector', 'msMatchesSelector', 'matches',
   ].filter((p) => p in HTMLElementPrototype).pop();
@@ -75,7 +75,7 @@ export function getMatchesProperty(HTMLElementPrototype) {
  * @param {!ClientRect} clientRect
  * @return {!{x: number, y: number}}
  */
-export function getNormalizedEventCoords(ev, pageOffset, clientRect) {
+function getNormalizedEventCoords(ev, pageOffset, clientRect) {
   const {x, y} = pageOffset;
   const documentX = x + clientRect.left;
   const documentY = y + clientRect.top;
@@ -93,3 +93,5 @@ export function getNormalizedEventCoords(ev, pageOffset, clientRect) {
 
   return {x: normalizedX, y: normalizedY};
 }
+
+export {supportsCssVariables, applyPassive, getMatchesProperty, getNormalizedEventCoords};
