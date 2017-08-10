@@ -19,7 +19,7 @@ import td from 'testdouble';
 
 import {setupFoundationTest} from '../helpers/setup';
 import {verifyDefaultAdapter, captureHandlers as baseCaptureHandlers} from '../helpers/foundation';
-import MDCIconToggleFoundation from '../../../packages/mdc-icon-toggle/foundation';
+import {MDCIconToggleFoundation} from '../../../packages/mdc-icon-toggle/foundation';
 
 const {strings, cssClasses} = MDCIconToggleFoundation;
 

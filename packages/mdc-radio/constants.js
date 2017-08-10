@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export const strings = {
+
+/** @enum {string} */
+const strings = {
   NATIVE_CONTROL_SELECTOR: '.mdc-radio__native-control',
 };
 
-export const cssClasses = {
+/** @enum {string} */
+const cssClasses = {
   ROOT: 'mdc-radio',
   DISABLED: 'mdc-radio--disabled',
 };
+
+export {strings, cssClasses};

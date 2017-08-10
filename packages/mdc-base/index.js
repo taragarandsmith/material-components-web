@@ -16,4 +16,6 @@
 
 import MDCFoundation from './foundation';
 import MDCComponent from './component';
-export {MDCFoundation, MDCComponent};
+import {SelectionControlState} from './selection-control';
+
+export {MDCFoundation, MDCComponent, SelectionControlState};

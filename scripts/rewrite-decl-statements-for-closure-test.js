@@ -87,6 +87,7 @@ function main(argv) {
 }
 
 function transform(srcFile, rootDir) {
+  console.log(`[rewrite] ${srcFile}`);
   const src = fs.readFileSync(srcFile, 'utf8');
   const ast = recast.parse(src, {
     parser: {
@@ -159,7 +160,7 @@ function rewriteDeclarationSource(node, srcFile, rootDir) {
   const pathParts = source.split('/');
   const isMDCImport = pathParts[0] === '@material';
   if (isMDCImport) {
-    const modName = pathParts[1];  // @material/<modName>
+    const modName = pathParts[1]; // @material/<modName>
     const atMaterialReplacementPath = `${rootDir}/mdc-${modName}`;
     const rewrittenSource = [atMaterialReplacementPath].concat(pathParts.slice(2)).join('/');
     source = rewrittenSource;

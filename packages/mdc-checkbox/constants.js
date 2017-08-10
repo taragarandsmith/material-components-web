@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
+/** @const {string} */
 const ROOT = 'mdc-checkbox';
 
-export const cssClasses = {
-  ROOT: 'mdc-checkbox',
+/** @enum {string} */
+const cssClasses = {
   UPGRADED: 'mdc-checkbox--upgraded',
   CHECKED: 'mdc-checkbox--checked',
   INDETERMINATE: 'mdc-checkbox--indeterminate',
@@ -30,7 +31,8 @@ export const cssClasses = {
   ANIM_INDETERMINATE_UNCHECKED: 'mdc-checkbox--anim-indeterminate-unchecked',
 };
 
-export const strings = {
+/** @enum {string} */
+const strings = {
   NATIVE_CONTROL_SELECTOR: `.${ROOT}__native-control`,
   TRANSITION_STATE_INIT: 'init',
   TRANSITION_STATE_CHECKED: 'checked',
@@ -38,6 +40,9 @@ export const strings = {
   TRANSITION_STATE_INDETERMINATE: 'indeterminate',
 };
 
-export const numbers = {
+/** @enum {number} */
+const numbers = {
   ANIM_END_LATCH_MS: 100,
 };
+
+export {cssClasses, strings, numbers};

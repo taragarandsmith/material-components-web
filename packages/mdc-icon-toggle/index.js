@@ -14,28 +14,39 @@
  * limitations under the License.
  */
 
-import {MDCComponent} from '@material/base';
+import MDCComponent from '@material/base/component';
+import * as foundation from './foundation';
+/* eslint-disable no-unused-vars */
+import {MDCRippleAdapter} from '@material/ripple/adapter';
+/* eslint-enable no-unused-vars */
 import {MDCRipple, MDCRippleFoundation} from '@material/ripple';
 
-import MDCIconToggleFoundation from './foundation';
-
-export {MDCIconToggleFoundation};
-
-export class MDCIconToggle extends MDCComponent {
+/**
+ * @extends {MDCComponent<!foundation.MDCIconToggleFoundation>}
+ */
+class MDCIconToggle extends MDCComponent {
   static attachTo(root) {
     return new MDCIconToggle(root);
   }
 
   constructor(...args) {
     super(...args);
+
+    /** @private {!MDCRipple} */
     this.ripple_ = this.initRipple_();
   }
 
+  /** @return {!Element} */
   get iconEl_() {
-    const {iconInnerSelector: sel} = this.root_.dataset;
-    return sel ? this.root_.querySelector(sel) : this.root_;
+    const {'iconInnerSelector': sel} = this.root_.dataset;
+    return sel ?
+      /** @type {!Element} */ (this.root_.querySelector(sel)) : this.root_;
   }
 
+  /**
+   * @return {!MDCRipple}
+   * @private
+   */
   initRipple_() {
     const adapter = Object.assign(MDCRipple.createAdapter(this), {
       isUnbounded: () => true,
@@ -62,43 +73,44 @@ export class MDCIconToggle extends MDCComponent {
     super.destroy();
   }
 
+  /** @return {!foundation.MDCIconToggleFoundation} */
   getDefaultFoundation() {
-    return new MDCIconToggleFoundation({
+    return new foundation.MDCIconToggleFoundation({
       addClass: (className) => this.iconEl_.classList.add(className),
       removeClass: (className) => this.iconEl_.classList.remove(className),
       registerInteractionHandler: (type, handler) => this.root_.addEventListener(type, handler),
       deregisterInteractionHandler: (type, handler) => this.root_.removeEventListener(type, handler),
-      setText: (text) => {
-        this.iconEl_.textContent = text;
-      },
+      setText: (text) => this.iconEl_.textContent = text,
       getTabIndex: () => /* number */ this.root_.tabIndex,
-      setTabIndex: (tabIndex) => {
-        this.root_.tabIndex = tabIndex;
-      },
+      setTabIndex: (tabIndex) => this.root_.tabIndex = tabIndex,
       getAttr: (name, value) => this.root_.getAttribute(name, value),
       setAttr: (name, value) => this.root_.setAttribute(name, value),
       rmAttr: (name) => this.root_.removeAttribute(name),
-      notifyChange: (evtData) => this.emit(MDCIconToggleFoundation.strings.CHANGE_EVENT, evtData),
+      notifyChange: (evtData) => this.emit(foundation.MDCIconToggleFoundation.strings.CHANGE_EVENT, evtData),
     });
   }
 
   initialSyncWithDOM() {
-    this.on = this.root_.getAttribute(MDCIconToggleFoundation.strings.ARIA_PRESSED) === 'true';
-    this.disabled = this.root_.getAttribute(MDCIconToggleFoundation.strings.ARIA_DISABLED) === 'true';
+    this.on = this.root_.getAttribute(foundation.MDCIconToggleFoundation.strings.ARIA_PRESSED) === 'true';
+    this.disabled = this.root_.getAttribute(foundation.MDCIconToggleFoundation.strings.ARIA_DISABLED) === 'true';
   }
 
+  /** @return {boolean} */
   get on() {
     return this.foundation_.isOn();
   }
 
+  /** @param {boolean} isOn */
   set on(isOn) {
     this.foundation_.toggle(isOn);
   }
 
+  /** @return {boolean} */
   get disabled() {
     return this.foundation_.isDisabled();
   }
 
+  /** @param {boolean} isDisabled */
   set disabled(isDisabled) {
     this.foundation_.setDisabled(isDisabled);
   }
@@ -107,3 +119,7 @@ export class MDCIconToggle extends MDCComponent {
     this.foundation_.refreshToggleData();
   }
 }
+
+const MDCIconToggleFoundation = foundation.MDCIconToggleFoundation;
+
+export {MDCIconToggle, MDCIconToggleFoundation};
