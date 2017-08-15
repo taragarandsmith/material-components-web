@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-export const cssClasses = {
+/** @enum {string} */
+const cssClasses = {
   ROOT: 'mdc-form-field',
 };
 
-export const strings = {
+/** @enum {string} */
+const strings = {
   LABEL_SELECTOR: '.mdc-form-field > label',
 };
+
+export {cssClasses, strings};

@@ -17,7 +17,7 @@
 import * as animation from '@material/animation';
 import MDCComponent from '@material/base/component';
 /* eslint-disable no-unused-vars */
-import * as selectionControl from '@material/base/selection-control';
+import {MDCSelectionControlState, MDCSelectionControl} from '@material/selection-control';
 /* eslint-enable no-unused-vars */
 import MDCCheckboxFoundation from './foundation';
 import {MDCRipple, MDCRippleFoundation} from '@material/ripple';
@@ -25,6 +25,7 @@ import * as rippleUtil from '@material/ripple/util';
 
 /**
  * @extends MDCComponent<!MDCCheckboxFoundation>
+ * @implements {MDCSelectionControl}
  */
 class MDCCheckbox extends MDCComponent {
   static attachTo(root) {
@@ -33,12 +34,12 @@ class MDCCheckbox extends MDCComponent {
 
   /**
    * Returns the state of the native control element, or null if the native control element is not present.
-   * @return {?selectionControl.SelectionControlState}
+   * @return {?MDCSelectionControlState}
    * @private
    */
   get nativeCb_() {
     const {NATIVE_CONTROL_SELECTOR} = MDCCheckboxFoundation.strings;
-    const cbEl = /** @type {?selectionControl.SelectionControlState} */ (
+    const cbEl = /** @type {?MDCSelectionControlState} */ (
       this.root_.querySelector(NATIVE_CONTROL_SELECTOR));
     return cbEl;
   }
