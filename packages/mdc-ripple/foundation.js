@@ -112,7 +112,7 @@ class MDCRippleFoundation extends MDCFoundation {
    * and then initialized at mount time on the client.
    * @return {boolean}
    */
-  get isSupported_() {
+  isSupported_() {
     return this.adapter_.browserSupportsCssVars();
   }
 
@@ -202,7 +202,7 @@ class MDCRippleFoundation extends MDCFoundation {
   }
 
   init() {
-    if (!this.isSupported_) {
+    if (!this.isSupported_()) {
       return;
     }
     this.addEventListeners_();
@@ -423,7 +423,7 @@ class MDCRippleFoundation extends MDCFoundation {
   }
 
   destroy() {
-    if (!this.isSupported_) {
+    if (!this.isSupported_()) {
       return;
     }
     this.removeEventListeners_();

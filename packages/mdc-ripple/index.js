@@ -81,13 +81,8 @@ class MDCRipple extends MDCComponent {
 
   /** @param {boolean} unbounded */
   set unbounded(unbounded) {
-    const {UNBOUNDED} = MDCRippleFoundation.cssClasses;
     this.unbounded_ = Boolean(unbounded);
-    if (this.unbounded_) {
-      this.root_.classList.add(UNBOUNDED);
-    } else {
-      this.root_.classList.remove(UNBOUNDED);
-    }
+    this.updateUnbounded_();
   }
 
   activate() {
@@ -109,6 +104,15 @@ class MDCRipple extends MDCComponent {
 
   initialSyncWithDOM() {
     this.unbounded = 'mdcRippleIsUnbounded' in this.root_.dataset;
+  }
+
+  updateUnbounded_() {
+    const {UNBOUNDED} = MDCRippleFoundation.cssClasses;
+    if (this.unbounded_) {
+      this.root_.classList.add(UNBOUNDED);
+    } else {
+      this.root_.classList.remove(UNBOUNDED);
+    }
   }
 }
 
