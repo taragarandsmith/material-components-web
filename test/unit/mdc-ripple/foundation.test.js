@@ -40,17 +40,21 @@ test('numbers returns constants.numbers', () => {
 test('defaultAdapter returns a complete adapter implementation', () => {
   verifyDefaultAdapter(MDCRippleFoundation, [
     'browserSupportsCssVars', 'isUnbounded', 'isSurfaceActive', 'isSurfaceDisabled',
-    'addClass', 'removeClass', 'registerInteractionHandler', 'deregisterInteractionHandler',
+    'addRootClass', 'addUnboundedClass', 'addBackgroundFocusedClass', 'addBackgroundActiveFillClass',
+    'addForegroundActivationClass', 'addForegroundDeactivationClass',
+    'removeRootClass', 'removeUnboundedClass', 'removeBackgroundFocusedClass',
+    'removeBackgroundActiveFillClass', 'removeForegroundActivationClass', 'removeForegroundDeactivationClass',
+    'registerInteractionHandler', 'deregisterInteractionHandler',
     'registerResizeHandler', 'deregisterResizeHandler', 'updateCssVariable',
     'computeBoundingRect', 'getWindowPageOffset',
   ]);
 });
 
-testFoundation(`#init calls adapter.addClass("${cssClasses.ROOT}")`, ({adapter, foundation, mockRaf}) => {
+testFoundation('#init calls adapter.addRootClass()', ({adapter, foundation, mockRaf}) => {
   foundation.init();
   mockRaf.flush();
 
-  td.verify(adapter.addClass(cssClasses.ROOT));
+  td.verify(adapter.addRootClass());
 });
 
 testFoundation('#init adds unbounded class when adapter indicates unbounded', ({adapter, foundation, mockRaf}) => {
@@ -58,7 +62,7 @@ testFoundation('#init adds unbounded class when adapter indicates unbounded', ({
   foundation.init();
   mockRaf.flush();
 
-  td.verify(adapter.addClass(cssClasses.UNBOUNDED));
+  td.verify(adapter.addUnboundedClass());
 });
 
 testFoundation('#init does not add unbounded class when adapter does not indicate unbounded (default)',
@@ -66,7 +70,7 @@ testFoundation('#init does not add unbounded class when adapter does not indicat
     foundation.init();
     mockRaf.flush();
 
-    td.verify(adapter.addClass(cssClasses.UNBOUNDED), {times: 0});
+    td.verify(adapter.addUnboundedClass(), {times: 0});
   });
 
 testFoundation('#init gracefully exits when css variables are not supported', false,
@@ -74,7 +78,7 @@ testFoundation('#init gracefully exits when css variables are not supported', fa
     foundation.init();
     mockRaf.flush();
 
-    td.verify(adapter.addClass(cssClasses.ROOT), {times: 0});
+    td.verify(adapter.addRootClass(), {times: 0});
   });
 
 testFoundation(`#init sets ${strings.VAR_SURFACE_WIDTH} css variable to the clientRect's width`,
@@ -189,16 +193,16 @@ testFoundation('#destroy unregisters the resize handler', ({foundation, adapter}
   td.verify(adapter.deregisterResizeHandler(resizeHandler));
 });
 
-testFoundation(`#destroy removes ${cssClasses.ROOT}`, ({foundation, adapter, mockRaf}) => {
+testFoundation('#destroy removes root class', ({foundation, adapter, mockRaf}) => {
   foundation.destroy();
   mockRaf.flush();
-  td.verify(adapter.removeClass(cssClasses.ROOT));
+  td.verify(adapter.removeRootClass());
 });
 
-testFoundation(`#destroy removes ${cssClasses.UNBOUNDED}`, ({foundation, adapter, mockRaf}) => {
+testFoundation('#destroy removes unbounded class', ({foundation, adapter, mockRaf}) => {
   foundation.destroy();
   mockRaf.flush();
-  td.verify(adapter.removeClass(cssClasses.UNBOUNDED));
+  td.verify(adapter.removeUnboundedClass());
 });
 
 testFoundation('#destroy removes all CSS variables', ({foundation, adapter, mockRaf}) => {

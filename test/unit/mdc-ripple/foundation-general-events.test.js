@@ -18,7 +18,7 @@ import {assert} from 'chai';
 import td from 'testdouble';
 
 import {testFoundation, captureHandlers} from './helpers';
-import {cssClasses, strings} from '../../../packages/mdc-ripple/constants';
+import {strings} from '../../../packages/mdc-ripple/constants';
 
 suite('MDCRippleFoundation - General Events');
 
@@ -94,7 +94,7 @@ testFoundation('activates the background on focus', ({foundation, adapter, mockR
 
   handlers.focus();
   mockRaf.flush();
-  td.verify(adapter.addClass(cssClasses.BG_FOCUSED));
+  td.verify(adapter.addBackgroundFocusedClass());
 });
 
 testFoundation('deactivates the background on blur', ({foundation, adapter, mockRaf}) => {
@@ -104,5 +104,5 @@ testFoundation('deactivates the background on blur', ({foundation, adapter, mock
 
   handlers.blur();
   mockRaf.flush();
-  td.verify(adapter.removeClass(cssClasses.BG_FOCUSED));
+  td.verify(adapter.removeBackgroundFocusedClass());
 });

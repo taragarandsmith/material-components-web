@@ -93,8 +93,18 @@ class MDCRippleFoundation extends MDCFoundation {
       isUnbounded: () => /* boolean */ {},
       isSurfaceActive: () => /* boolean */ {},
       isSurfaceDisabled: () => /* boolean */ {},
-      addClass: (/* className: string */) => {},
-      removeClass: (/* className: string */) => {},
+      addRootClass: () => {},
+      addUnboundedClass: () => {},
+      addBackgroundFocusedClass: () => {},
+      addBackgroundActiveFillClass: () => {},
+      addForegroundActivationClass: () => {},
+      addForegroundDeactivationClass: () => {},
+      removeRootClass: () => {},
+      removeUnboundedClass: () => {},
+      removeBackgroundFocusedClass: () => {},
+      removeBackgroundActiveFillClass: () => {},
+      removeForegroundActivationClass: () => {},
+      removeForegroundDeactivationClass: () => {},
       registerInteractionHandler: (/* evtType: string, handler: EventListener */) => {},
       deregisterInteractionHandler: (/* evtType: string, handler: EventListener */) => {},
       registerResizeHandler: (/* handler: EventListener */) => {},
@@ -151,10 +161,10 @@ class MDCRippleFoundation extends MDCFoundation {
       activate: (e) => this.activate_(e),
       deactivate: (e) => this.deactivate_(e),
       focus: () => requestAnimationFrame(
-        () => this.adapter_.addClass(MDCRippleFoundation.cssClasses.BG_FOCUSED)
+        () => this.adapter_.addBackgroundFocusedClass()
       ),
       blur: () => requestAnimationFrame(
-        () => this.adapter_.removeClass(MDCRippleFoundation.cssClasses.BG_FOCUSED)
+        () => this.adapter_.removeBackgroundFocusedClass()
       ),
     };
 
@@ -207,11 +217,10 @@ class MDCRippleFoundation extends MDCFoundation {
     }
     this.addEventListeners_();
 
-    const {ROOT, UNBOUNDED} = MDCRippleFoundation.cssClasses;
     requestAnimationFrame(() => {
-      this.adapter_.addClass(ROOT);
+      this.adapter_.addRootClass();
       if (this.adapter_.isUnbounded()) {
-        this.adapter_.addClass(UNBOUNDED);
+        this.adapter_.addUnboundedClass();
       }
       this.layoutInternal_();
     });
@@ -272,11 +281,6 @@ class MDCRippleFoundation extends MDCFoundation {
   /** @private */
   animateActivation_() {
     const {VAR_FG_TRANSLATE_START, VAR_FG_TRANSLATE_END} = MDCRippleFoundation.strings;
-    const {
-      BG_ACTIVE_FILL,
-      FG_DEACTIVATION,
-      FG_ACTIVATION,
-    } = MDCRippleFoundation.cssClasses;
     const {DEACTIVATION_TIMEOUT_MS} = MDCRippleFoundation.numbers;
 
     let translateStart = '';
@@ -294,12 +298,12 @@ class MDCRippleFoundation extends MDCFoundation {
     clearTimeout(this.activationTimer_);
     clearTimeout(this.fgDeactivationRemovalTimer_);
     this.rmBoundedActivationClasses_();
-    this.adapter_.removeClass(FG_DEACTIVATION);
+    this.adapter_.removeForegroundDeactivationClass();
 
     // Force layout in order to re-trigger the animation.
     this.adapter_.computeBoundingRect();
-    this.adapter_.addClass(BG_ACTIVE_FILL);
-    this.adapter_.addClass(FG_ACTIVATION);
+    this.adapter_.addBackgroundActiveFillClass();
+    this.adapter_.addForegroundActivationClass();
     this.activationTimer_ = setTimeout(() => this.activationTimerCallback_(), DEACTIVATION_TIMEOUT_MS);
   }
 
@@ -339,23 +343,21 @@ class MDCRippleFoundation extends MDCFoundation {
 
   /** @private */
   runDeactivationUXLogicIfReady_() {
-    const {FG_DEACTIVATION} = MDCRippleFoundation.cssClasses;
     const {hasDeactivationUXRun, isActivated} = this.activationState_;
     const activationHasEnded = hasDeactivationUXRun || !isActivated;
     if (activationHasEnded && this.activationAnimationHasEnded_) {
       this.rmBoundedActivationClasses_();
-      this.adapter_.addClass(FG_DEACTIVATION);
+      this.adapter_.addForegroundDeactivationClass();
       this.fgDeactivationRemovalTimer_ = setTimeout(() => {
-        this.adapter_.removeClass(FG_DEACTIVATION);
+        this.adapter_.removeForegroundDeactivationClass();
       }, numbers.FG_DEACTIVATION_MS);
     }
   }
 
   /** @private */
   rmBoundedActivationClasses_() {
-    const {BG_ACTIVE_FILL, FG_ACTIVATION} = MDCRippleFoundation.cssClasses;
-    this.adapter_.removeClass(BG_ACTIVE_FILL);
-    this.adapter_.removeClass(FG_ACTIVATION);
+    this.adapter_.removeBackgroundActiveFillClass();
+    this.adapter_.removeForegroundActivationClass();
     this.activationAnimationHasEnded_ = false;
     this.adapter_.computeBoundingRect();
   }
@@ -414,10 +416,9 @@ class MDCRippleFoundation extends MDCFoundation {
    * @private
    */
   animateDeactivation_(e, {wasActivatedByPointer, wasElementMadeActive}) {
-    const {BG_FOCUSED} = MDCRippleFoundation.cssClasses;
     if (wasActivatedByPointer || wasElementMadeActive) {
       // Remove class left over by element being focused
-      this.adapter_.removeClass(BG_FOCUSED);
+      this.adapter_.removeBackgroundFocusedClass();
       this.runDeactivationUXLogicIfReady_();
     }
   }
@@ -428,10 +429,9 @@ class MDCRippleFoundation extends MDCFoundation {
     }
     this.removeEventListeners_();
 
-    const {ROOT, UNBOUNDED} = MDCRippleFoundation.cssClasses;
     requestAnimationFrame(() => {
-      this.adapter_.removeClass(ROOT);
-      this.adapter_.removeClass(UNBOUNDED);
+      this.adapter_.removeRootClass();
+      this.adapter_.removeUnboundedClass();
       this.removeCssVars_();
     });
   }

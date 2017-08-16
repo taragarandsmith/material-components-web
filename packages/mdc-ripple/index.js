@@ -60,8 +60,30 @@ class MDCRipple extends MDCComponent {
       isUnbounded: () => instance.unbounded,
       isSurfaceActive: () => instance.root_[MATCHES](':active'),
       isSurfaceDisabled: () => instance.disabled,
-      addClass: (className) => instance.root_.classList.add(className),
-      removeClass: (className) => instance.root_.classList.remove(className),
+      addRootClass: () =>
+        instance.root_.classList.add(MDCRippleFoundation.cssClasses.ROOT),
+      addUnboundedClass: () =>
+        instance.root_.classList.add(MDCRippleFoundation.cssClasses.UNBOUNDED),
+      addBackgroundFocusedClass: () =>
+        instance.root_.classList.add(MDCRippleFoundation.cssClasses.BG_FOCUSED),
+      addBackgroundActiveFillClass: () =>
+        instance.root_.classList.add(MDCRippleFoundation.cssClasses.BG_ACTIVE_FILL),
+      addForegroundActivationClass: () =>
+        instance.root_.classList.add(MDCRippleFoundation.cssClasses.FG_ACTIVATION),
+      addForegroundDeactivationClass: () =>
+        instance.root_.classList.add(MDCRippleFoundation.cssClasses.FG_DEACTIVATION),
+      removeRootClass: () =>
+        instance.root_.classList.remove(MDCRippleFoundation.cssClasses.ROOT),
+      removeUnboundedClass: () =>
+        instance.root_.classList.remove(MDCRippleFoundation.cssClasses.UNBOUNDED),
+      removeBackgroundFocusedClass: () =>
+        instance.root_.classList.remove(MDCRippleFoundation.cssClasses.BG_FOCUSED),
+      removeBackgroundActiveFillClass: () =>
+        instance.root_.classList.remove(MDCRippleFoundation.cssClasses.BG_ACTIVE_FILL),
+      removeForegroundActivationClass: () =>
+        instance.root_.classList.remove(MDCRippleFoundation.cssClasses.FG_ACTIVATION),
+      removeForegroundDeactivationClass: () =>
+        instance.root_.classList.remove(MDCRippleFoundation.cssClasses.FG_DEACTIVATION),
       registerInteractionHandler: (evtType, handler) =>
         instance.root_.addEventListener(evtType, handler, util.applyPassive()),
       deregisterInteractionHandler: (evtType, handler) =>

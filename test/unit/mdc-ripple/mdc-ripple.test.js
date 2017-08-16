@@ -124,6 +124,7 @@ test('adapter#isSurfaceDisabled delegates to component\'s disabled getter', () =
   assert.isTrue(component.getDefaultFoundation().adapter_.isSurfaceDisabled());
 });
 
+/*
 test('adapter#addClass adds a class to the root', () => {
   const {root, component} = setupTest();
   component.getDefaultFoundation().adapter_.addClass('foo');
@@ -136,6 +137,7 @@ test('adapter#removeClass removes a class from the root', () => {
   component.getDefaultFoundation().adapter_.removeClass('foo');
   assert.isNotOk(root.classList.contains('foo'));
 });
+*/
 
 test('adapter#registerInteractionHandler proxies to addEventListener', () => {
   const {root, component} = setupTest();

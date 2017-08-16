@@ -50,11 +50,29 @@ class MDCRippleAdapter {
   /** @return {boolean} */
   isSurfaceDisabled() {}
 
-  /** @param {string} className */
-  addClass(className) {}
+  addRootClass() {}
 
-  /** @param {string} className */
-  removeClass(className) {}
+  addUnboundedClass() {}
+
+  addBackgroundFocusedClass() {}
+
+  addBackgroundActiveFillClass() {}
+
+  addForegroundActivationClass() {}
+
+  addForegroundDeactivationClass() {}
+
+  removeRootClass() {}
+
+  removeUnboundedClass() {}
+
+  removeBackgroundFocusedClass() {}
+
+  removeBackgroundActiveFillClass() {}
+
+  removeForegroundActivationClass() {}
+
+  removeForegroundDeactivationClass() {}
 
   /**
    * @param {string} evtType

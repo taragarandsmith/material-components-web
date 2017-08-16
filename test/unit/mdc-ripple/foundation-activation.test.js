@@ -17,7 +17,7 @@
 import td from 'testdouble';
 
 import {testFoundation, captureHandlers} from './helpers';
-import {cssClasses, strings, numbers} from '../../../packages/mdc-ripple/constants';
+import {strings, numbers} from '../../../packages/mdc-ripple/constants';
 
 suite('MDCRippleFoundation - Activation Logic');
 
@@ -31,8 +31,8 @@ testFoundation('does nothing if component if isSurfaceDisabled is true',
 
     handlers.mousedown();
 
-    td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL), {times: 0});
-    td.verify(adapter.addClass(cssClasses.FG_ACTIVATION), {times: 0});
+    td.verify(adapter.addBackgroundActiveFillClass(), {times: 0});
+    td.verify(adapter.addForegroundActivationClass(), {times: 0});
   });
 
 testFoundation('adds activation classes on mousedown', ({foundation, adapter, mockRaf}) => {
@@ -42,8 +42,8 @@ testFoundation('adds activation classes on mousedown', ({foundation, adapter, mo
 
   handlers.mousedown();
   mockRaf.flush();
-  td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL));
-  td.verify(adapter.addClass(cssClasses.FG_ACTIVATION));
+  td.verify(adapter.addBackgroundActiveFillClass());
+  td.verify(adapter.addForegroundActivationClass());
 });
 
 testFoundation('sets FG position from the coords to the center within surface on mousedown',
@@ -90,8 +90,8 @@ testFoundation('adds activation classes on touchstart', ({foundation, adapter, m
 
   handlers.touchstart({changedTouches: [{pageX: 0, pageY: 0}]});
   mockRaf.flush();
-  td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL));
-  td.verify(adapter.addClass(cssClasses.FG_ACTIVATION));
+  td.verify(adapter.addBackgroundActiveFillClass());
+  td.verify(adapter.addForegroundActivationClass());
 });
 
 testFoundation('sets FG position from the coords to the center within surface on touchstart',
@@ -138,8 +138,8 @@ testFoundation('adds activation classes on pointerdown', ({foundation, adapter, 
 
   handlers.pointerdown();
   mockRaf.flush();
-  td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL));
-  td.verify(adapter.addClass(cssClasses.FG_ACTIVATION));
+  td.verify(adapter.addBackgroundActiveFillClass());
+  td.verify(adapter.addForegroundActivationClass());
 });
 
 testFoundation('sets FG position from the coords to the center within surface on pointerdown',
@@ -189,8 +189,8 @@ testFoundation('adds activation classes on keydown when surface is made active',
     handlers.keydown();
     mockRaf.flush();
 
-    td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL));
-    td.verify(adapter.addClass(cssClasses.FG_ACTIVATION));
+    td.verify(adapter.addBackgroundActiveFillClass());
+    td.verify(adapter.addForegroundActivationClass());
   });
 
 testFoundation('sets FG position to center on non-pointer activation', ({foundation, adapter, mockRaf}) => {
@@ -229,8 +229,8 @@ testFoundation('adds activation classes on programmatic activation', ({foundatio
   foundation.activate();
   mockRaf.flush();
 
-  td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL));
-  td.verify(adapter.addClass(cssClasses.FG_ACTIVATION));
+  td.verify(adapter.addBackgroundActiveFillClass());
+  td.verify(adapter.addForegroundActivationClass());
 });
 
 testFoundation('sets FG position to center on non-pointer activation', ({foundation, adapter, mockRaf}) => {
@@ -271,8 +271,8 @@ testFoundation('does not redundantly add classes on touchstart followed by mouse
     mockRaf.flush();
     handlers.mousedown();
     mockRaf.flush();
-    td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL), {times: 1});
-    td.verify(adapter.addClass(cssClasses.FG_ACTIVATION), {times: 1});
+    td.verify(adapter.addBackgroundActiveFillClass(), {times: 1});
+    td.verify(adapter.addForegroundActivationClass(), {times: 1});
   });
 
 testFoundation('does not redundantly add classes on touchstart followed by pointerstart',
@@ -285,8 +285,8 @@ testFoundation('does not redundantly add classes on touchstart followed by point
     mockRaf.flush();
     handlers.pointerdown();
     mockRaf.flush();
-    td.verify(adapter.addClass(cssClasses.BG_ACTIVE_FILL), {times: 1});
-    td.verify(adapter.addClass(cssClasses.FG_ACTIVATION), {times: 1});
+    td.verify(adapter.addBackgroundActiveFillClass(), {times: 1});
+    td.verify(adapter.addForegroundActivationClass(), {times: 1});
   });
 
 testFoundation('removes deactivation classes on activate to ensure ripples can be retriggered',
@@ -302,7 +302,7 @@ testFoundation('removes deactivation classes on activate to ensure ripples can b
     handlers.mousedown();
     mockRaf.flush();
 
-    td.verify(adapter.removeClass(cssClasses.FG_DEACTIVATION));
+    td.verify(adapter.removeForegroundDeactivationClass());
   });
 
 testFoundation('displays the foreground ripple on activation when unbounded', ({foundation, adapter, mockRaf}) => {
@@ -315,7 +315,7 @@ testFoundation('displays the foreground ripple on activation when unbounded', ({
   handlers.mousedown({pageX: 0, pageY: 0});
   mockRaf.flush();
 
-  td.verify(adapter.addClass(cssClasses.FG_ACTIVATION));
+  td.verify(adapter.addForegroundActivationClass());
 });
 
 testFoundation('clears translation custom properties when unbounded in case ripple was switched from bounded',
