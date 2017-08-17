@@ -14,48 +14,27 @@
 // limitations under the License.
 //
 
+@import "./mixins";
 @import "@material/elevation/mixins";
 @import "@material/ripple/mixins";
 @import "@material/theme/mixins";
-@import "@material/typography/mixins";
 
 // postcss-bem-linter: define button
 
 .mdc-button {
-  @include mdc-ripple-base;
+  @include mdc-button-base;
+  @include mdc-button-sparse;
+  @include mdc-button-flat;
+  @include mdc-button-roomy;
   @include mdc-ripple-bg((pseudo: "::before"));
   @include mdc-ripple-fg((pseudo: "::after"));
   @include mdc-theme-prop(color, text-primary-on-light);
-  @include mdc-typography-base;
-
-  display: inline-block;
-  position: relative;
-  min-width: 64px;
-  height: 36px;
-  padding: 0 16px;
-  border: none;
-  border-radius: 2px;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: .04em;
-  line-height: 36px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  vertical-align: middle;
-  user-select: none;
-  box-sizing: border-box;
-  -webkit-appearance: none;
 
   &:not(.mdc-ripple-upgraded) {
     -webkit-tap-highlight-color: rgba(black, .18);
   }
 
   @include mdc-theme-dark {
-    @include mdc-ripple-base;
     @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .14));
     @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .14));
     @include mdc-theme-prop(color, text-primary-on-dark);
@@ -65,114 +44,21 @@
     }
   }
 
-  @each $theme-style in (primary, secondary) {
-    // Needed for backward compatibility. Theme uses the term "secondary", but button still calls it "accent" for now.
-    $modifier: if($theme-style == "secondary", "accent", $theme-style);
-
-    &.mdc-button--#{$modifier} {
-      @include mdc-ripple-base;
-      @include mdc-ripple-bg((pseudo: "::before", theme-style: $theme-style, opacity: .12));
-      @include mdc-ripple-fg((pseudo: "::after", theme-style: $theme-style, opacity: .12));
-    }
-  }
-
-  // postcss-bem-linter: ignore
-  &:active {
-    outline: none;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-  }
-
   &--dense {
-    height: 32px;
-    font-size: .8125rem; // 13sp
-    line-height: 32px;
+    @include mdc-button-dense;
   }
 
   // TODO(cristobalchao): Disable ink wash on hover and alter elevation instead for raised surfaces.
   &--raised {
-    @include mdc-elevation(2);
-    @include mdc-elevation-transition;
-
-    min-width: 88px;
-
-    &:active {
-      @include mdc-elevation(8);
-    }
-
-    @each $theme-style in (primary, secondary) {
-      // Needed for backward compatibility. Theme uses the term "secondary", but button still calls it "accent" for now.
-      $modifier: if($theme-style == "secondary", "accent", $theme-style);
-
-      &.mdc-button--#{$modifier} {
-        @include mdc-ripple-base;
-        @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .14));
-        @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .14));
-      }
-    }
+    @include mdc-button-raised;
 
     @include mdc-theme-dark(".mdc-button") {
-      @include mdc-theme-prop(background-color, primary);
-      @include mdc-theme-prop(color, text-primary-on-primary);
-
-      // postcss-bem-linter: ignore
-      &::before {
-        // We are explicitly not fully adhering to Material Design here.
-        // This should be the 700-shade when active instead of a black shade.
-        // Due to the complexity involved in adhering fully it is being ignored.
-        // Instead re-using the existing architecture for shading works just fine.
-        color: black;
-      }
-    }
-  }
-
-  &--primary {
-    @include mdc-theme-prop(color, primary);
-
-    @include mdc-theme-dark(".mdc-button") {
-      @include mdc-theme-prop(color, primary);
-    }
-
-    // postcss-bem-linter: ignore
-    &.mdc-button--raised {
-      @include mdc-theme-prop(background-color, primary);
-      @include mdc-theme-prop(color, text-primary-on-primary);
-
-      // postcss-bem-linter: ignore
-      &::before {
-        color: black;
-      }
-    }
-  }
-
-  &--accent {
-    @include mdc-theme-prop(color, secondary);
-
-    @include mdc-theme-dark(".mdc-button") {
-      @include mdc-theme-prop(color, secondary);
-    }
-
-    // postcss-bem-linter: ignore
-    &.mdc-button--raised {
-      @include mdc-theme-prop(background-color, secondary);
-      @include mdc-theme-prop(color, text-primary-on-secondary);
-
-      // postcss-bem-linter: ignore
-      &::before {
-        color: black;
-      }
+      @include mdc-button-raised-color($mdc-theme-primary);
     }
   }
 
   &--compact {
-    padding: 0 8px;
+    @include mdc-button-compact;
   }
 
   fieldset:disabled &,
