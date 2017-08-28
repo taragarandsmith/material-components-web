@@ -1,6 +1,6 @@
 # MDC Web team
 
-MDC Web team members write and review code in our [GitHub repository](#github).
+MDC Web team members write and review code in this repository.
 They work with other Material Design Engineers (Android and iOS)
 and Designers to [write design docs](http://go/mdc-web-design-docs).
 The APIs across Web, Android, and iOS are expected to match, and the final code
@@ -11,15 +11,13 @@ tech debt. Tasks are prioritized on our [Pivotal tracker](#pivotal).
 
 ![MDC Web Feedback Loops](feedback.jpg?raw=true)
 
-### GitHub {#github}
-
-[Github Repository](https://github.com/material-components/material-components-web)
+### GitHub
 
 Contributors submit PRs through GitHub. MDC Web team members review the code
 and documentation before merging it to master. Both code and documentation
 are immediately available on GitHub once it is merged.
 
-### Pivotal {#pivotal}
+### Pivotal
 
 [Pivotal Backlog + Icebox](https://www.pivotaltracker.com/n/projects/1664011)
 
