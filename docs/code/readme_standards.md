@@ -9,7 +9,7 @@ MDC Web component documentation serves two purposes:
 
 ## README Template
 
-Please follow the [README template](readme_template) *exactly*. This format is
+Please follow the [README template](readme_template.md) *exactly*. This format is
 read/understood by the [Catalog Site](https://material.io/components/web/catalog/)
 
 ## Usage

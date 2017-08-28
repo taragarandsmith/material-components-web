@@ -18,7 +18,7 @@ the component is
   * `SCREENSHOT_NAME`, name of the screenshot image of the component
   * `SCREENSHOT_WIDTH`, width of the screenshot image of the component
 * `LINK_TO_CATALOG_SERVER`, link to a page on [Catalog Server](https://material-components-web.appspot.com/)
-* `USAGE_SECTIONS`, see [Usage standards](readme_standards#usage)
+* `USAGE_SECTIONS`, see [Usage standards](readme_standards.md)
 
 TODO: Come up with best practices for Catalog site related fields
 

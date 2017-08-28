@@ -23,7 +23,7 @@ our components fast.
 MDC Web component documentation serves two purposes:
 
 * Populate the [Catalog Site](https://material.io/components/web/catalog/)
-* Highlight [how to use our APIs](readme_standards), for our external developers
+* Highlight [how to use our APIs](readme_standards.md), for our external developers
 
 > Developers should not have to read our code to know how to use our APIs
 
