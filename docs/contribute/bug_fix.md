@@ -20,4 +20,4 @@ fix(foo): Short description of fix
 Resolves #1234
 ```
 
-This commit message is pulled into our CHANGELOG when we [release](../open_source.md).
+This commit message is pulled into our CHANGELOG when we [release](../open_source/README.md).

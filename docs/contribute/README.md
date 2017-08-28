@@ -2,7 +2,7 @@
 
 MDC Web is an open source project, so we encourage contributions! If you are
 looking for a bug to fix, check out [Help Wanted Issues](https://github.com/material-components/material-components-web/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) on GitHub. (Or you can file
-new bugs, which will fall into our [Triage Process](../external/triage.md).)
+new bugs, which will fall into our [Triage Process](../open_source/triage.md).)
 
 ### Fix a Bug
 

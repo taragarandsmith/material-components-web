@@ -20,4 +20,4 @@ The final commit message for a feat to the mdc-foo package should look like this
 feat(foo): Short description of feature
 ```
 
-This commit message is pulled into our CHANGELOG when we [release](../external.md).
+This commit message is pulled into our CHANGELOG when we [release](../open_source/README.md).
