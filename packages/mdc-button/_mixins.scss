@@ -18,12 +18,36 @@
 @import "@material/theme/mixins";
 @import "@material/theme/variables";
 
+@mixin mdc-button-container-fill-color($color) {
+  &:enabled {
+    @include mdc-theme-prop(background-color, $color);
+  }
+}
+
+@mixin mdc-button-stroke-color($color) {
+  &:enabled {
+    @include mdc-theme-prop(border-color, $color);
+  }
+}
+
+@mixin mdc-button-ink-color($color) {
+  &:enabled {
+    @include mdc-theme-prop(color, $color);
+  }
+}
+
+@mixin mdc-button-ripple($ripple-config) {
+  &:enabled {
+    @include mdc-ripple-base;
+    @include mdc-ripple-bg(map-merge((pseudo: "::before"), $ripple-config));
+    @include mdc-ripple-fg(map-merge((pseudo: "::after"), $ripple-config));
+  }
+}
+
 @mixin mdc-button-base_() {
-  @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before"));
-  @include mdc-ripple-fg((pseudo: "::after"));
+  @include mdc-button-ripple(());
   @include mdc-typography(button);
-  @include mdc-theme-prop(color, text-primary-on-light);
+  @include mdc-button-ink-color(text-primary-on-light);
 
   display: inline-block;
   position: relative;
@@ -57,28 +81,20 @@
 }
 
 @mixin mdc-button-dark_() {
-  @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .16));
-  @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .16));
-  @include mdc-theme-prop(color, text-primary-on-dark);
+  @include mdc-button-ripple((base-color: white, opacity: .16));
+  @include mdc-button-ink-color(text-primary-on-dark);
 }
 
 @mixin mdc-button-filled_() {
-  @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .32));
-  @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .32));
-  @include mdc-theme-prop(color, text-primary-on-dark);
-
-  background-color: black;
+  @include mdc-button-ripple((base-color: white, opacity: .32));
+  @include mdc-button-ink-color(text-primary-on-dark);
+  @include mdc-button-container-fill-color(black);
 }
 
 @mixin mdc-button-filled-dark_() {
-  @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", base-color: black, opacity: .32));
-  @include mdc-ripple-fg((pseudo: "::after", base-color: black, opacity: .32));
-  @include mdc-theme-prop(color, text-primary-on-light);
-
-  background-color: white;
+  @include mdc-button-ripple((base-color: black, opacity: .32));
+  @include mdc-button-ink-color(text-primary-on-light);
+  @include mdc-button-container-fill-color(white);
 }
 
 @mixin mdc-button-raised_() {
@@ -96,7 +112,7 @@
 }
 
 @mixin mdc-button-stroked_() {
-  @include mdc-theme-prop(border-color, text-primary-on-light);
+  @include mdc-button-stroke-color(text-primary-on-light);
 
   border-width: 2px;
   border-style: solid;
@@ -104,7 +120,7 @@
 }
 
 @mixin mdc-button-stroked-dark_() {
-  @include mdc-theme-prop(border-color, text-primary-on-dark);
+  @include mdc-button-stroke-color(text-primary-on-dark);
 }
 
 @mixin mdc-button-compact_() {
@@ -120,53 +136,47 @@
 @mixin mdc-button-theme_($theme-style) {
   $theme-value: map-get($mdc-theme-property-values, $theme-style);
 
-  @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .16));
-  @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .16));
-  @include mdc-theme-prop(color, $theme-style);
+  @include mdc-button-ripple((base-color: $theme-value, opacity: .16));
+  @include mdc-button-ink-color($theme-style);
 }
 
 @mixin mdc-button-theme-filled_($theme-style) {
   $theme-value: map-get($mdc-theme-property-values, text-primary-on-#{$theme-style});
 
-  @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .32));
-  @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .32));
-  @include mdc-theme-prop(background-color, $theme-style);
-  @include mdc-theme-prop(color, text-primary-on-#{$theme-style});
+  @include mdc-button-ripple((base-color: $theme-value, opacity: .32));
+  @include mdc-button-container-fill-color($theme-style);
+  @include mdc-button-ink-color(text-primary-on-#{$theme-style});
 }
 
 @mixin mdc-button-theme-stroked_($theme-style) {
-  @include mdc-theme-prop(border-color, $theme-style);
+  @include mdc-button-stroke-color($theme-style);
 }
 
 @mixin mdc-button-disabled_() {
-  color: rgba(black, .38);
+  @include mdc-button-ink-color(rgba(black, .38));
   cursor: default;
   pointer-events: none;
 }
 
 @mixin mdc-button-disabled-dark_() {
-  @include mdc-theme-prop(color, text-disabled-on-dark);
+  @include mdc-button-ink-color(text-primary-on-dark);
 }
 
 @mixin mdc-button-filled-disabled_() {
   @include mdc-elevation(0);
-  @include mdc-theme-prop(color, text-primary-on-dark);
-
-  background-color: rgba(black, .15);
+  @include mdc-button-ink-color(text-primary-on-dark);
+  @include mdc-button-container-fill-color(rgba(black, .15));
 }
 
 @mixin mdc-button-filled-disabled-dark_() {
-  @include mdc-theme-prop(color, text-disabled-on-dark);
-
-  background-color: rgba(255, 255, 255, .15);
+  @include mdc-button-ink-color(text-disabled-on-dark);
+  @include mdc-button-container-fill-color(rgba(white, .15));
 }
 
 @mixin mdc-button-stroked-disabled_() {
-  border-color: rgba(black, .38);
+  @include mdc-button-stroke-color(rgba(black, .38));
 }
 
 @mixin mdc-button-stroked-disabled-dark_() {
-  @include mdc-theme-prop(border-color, text-disabled-on-dark);
+  @include mdc-button-stroke-color(text-disabled-on-dark);
 }
