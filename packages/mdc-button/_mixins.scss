@@ -18,6 +18,11 @@
 @import "@material/theme/mixins";
 @import "@material/theme/variables";
 
+$default-ink-color: text-primary-on-light;
+$dark-theme-ink-color: text-primary-on-dark;
+$disabled-ink-color: rgba(black, .38);
+$disabled-dark-theme-ink-color: text-disabled-on-dark;
+
 @mixin mdc-button-container-fill-color($color) {
   &:enabled {
     @include mdc-theme-prop(background-color, $color);
@@ -47,7 +52,7 @@
 @mixin mdc-button-base_() {
   @include mdc-button-ripple(());
   @include mdc-typography(button);
-  @include mdc-button-ink-color(text-primary-on-light);
+  @include mdc-button-ink-color($default-ink-color);
 
   display: inline-block;
   position: relative;
@@ -82,7 +87,7 @@
 
 @mixin mdc-button-dark_() {
   @include mdc-button-ripple((base-color: white, opacity: .16));
-  @include mdc-button-ink-color(text-primary-on-dark);
+  @include mdc-button-ink-color($dark-theme-ink-color);
 }
 
 @mixin mdc-button-filled_() {
@@ -112,7 +117,7 @@
 }
 
 @mixin mdc-button-stroked_() {
-  @include mdc-button-stroke-color(text-primary-on-light);
+  @include mdc-button-stroke-color($default-ink-color);
 
   border-width: 2px;
   border-style: solid;
@@ -120,7 +125,7 @@
 }
 
 @mixin mdc-button-stroked-dark_() {
-  @include mdc-button-stroke-color(text-primary-on-dark);
+  @include mdc-button-stroke-color($dark-theme-ink-color);
 }
 
 @mixin mdc-button-compact_() {
@@ -153,13 +158,13 @@
 }
 
 @mixin mdc-button-disabled_() {
-  @include mdc-button-ink-color(rgba(black, .38));
+  @include mdc-button-ink-color($disabled-ink-color);
   cursor: default;
   pointer-events: none;
 }
 
 @mixin mdc-button-disabled-dark_() {
-  @include mdc-button-ink-color(text-primary-on-dark);
+  @include mdc-button-ink-color($disabled-dark-theme-ink-color);
 }
 
 @mixin mdc-button-filled-disabled_() {
@@ -174,9 +179,9 @@
 }
 
 @mixin mdc-button-stroked-disabled_() {
-  @include mdc-button-stroke-color(rgba(black, .38));
+  @include mdc-button-stroke-color($disabled-ink-color);
 }
 
 @mixin mdc-button-stroked-disabled-dark_() {
-  @include mdc-button-stroke-color(text-disabled-on-dark);
+  @include mdc-button-stroke-color($disabled-dark-theme-ink-color);
 }
