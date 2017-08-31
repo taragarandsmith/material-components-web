@@ -32,9 +32,7 @@ $mdc-theme-secondary: #64dd17 !default; // Light Green A700
 }
 
 .mdc-button.mdc-button--unelevated.purple-button, .mdc-button.mdc-button--raised.purple-button {
-  @include mdc-button-container-fill-color(#7b1fa2);
-  @include mdc-button-ink-color(white);
-  @include mdc-button-ripple((base-color: white, opacity: .16));
+  @include mdc-button-filled-accessible(#7b1fa2);
 }
 
 .mdc-button.mdc-button--stroked.purple-button {
