@@ -49,7 +49,6 @@
 
   display: inline-block;
   position: relative;
-  box-sizing: content-box;
   flex: 0 0 $mdc-checkbox-size;
   width: $mdc-checkbox-size;
   height: $mdc-checkbox-size;
@@ -58,6 +57,7 @@
   white-space: nowrap;
   cursor: pointer;
   vertical-align: bottom;
+  box-sizing: content-box;
 
   &::before,
   &::after {
@@ -84,8 +84,6 @@
     top: ($mdc-checkbox-touch-area - $mdc-checkbox-size) / 2;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    pointer-events: none;
     width: $mdc-checkbox-ui-pct;
     height: $mdc-checkbox-ui-pct;
     transition:
@@ -94,6 +92,8 @@
     border: $mdc-checkbox-border-width solid $mdc-checkbox-border-color;
     border-radius: 2px;
     background-color: transparent;
+    box-sizing: border-box;
+    pointer-events: none;
     will-change: background-color, border-color;
 
     @include mdc-theme-dark(".mdc-checkbox") {
@@ -297,56 +297,56 @@ fieldset:disabled .mdc-checkbox__native-control,
 
   &-unchecked-checked {
     .mdc-checkbox__checkmark__path {
+      transition: none;
       // Instead of delaying the animation, we simply multiply its length by 2 and begin the
       // animation at 50% in order to prevent a flash of styles applied to a checked checkmark
       // as the background is fading in before the animation begins.
       animation: $mdc-checkbox-transition-duration * 2 linear 0s mdc-checkbox-unchecked-checked-checkmark-path;
-      transition: none;
     }
   }
 
   &-unchecked-indeterminate {
     .mdc-checkbox__mixedmark {
-      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-unchecked-indeterminate-mixedmark;
       transition: none;
+      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-unchecked-indeterminate-mixedmark;
     }
   }
 
   &-checked-unchecked {
     .mdc-checkbox__checkmark__path {
-      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-checked-unchecked-checkmark-path;
       transition: none;
+      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-checked-unchecked-checkmark-path;
     }
   }
 
   &-checked-indeterminate {
     .mdc-checkbox__checkmark {
-      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-checked-indeterminate-checkmark;
       transition: none;
+      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-checked-indeterminate-checkmark;
     }
 
     .mdc-checkbox__mixedmark {
-      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-checked-indeterminate-mixedmark;
       transition: none;
+      animation: $mdc-checkbox-transition-duration linear 0s mdc-checkbox-checked-indeterminate-mixedmark;
     }
   }
 
   &-indeterminate-checked {
     .mdc-checkbox__checkmark {
-      animation: $_mdc-checkbox-indeterminate-change-duration linear 0s mdc-checkbox-indeterminate-checked-checkmark;
       transition: none;
+      animation: $_mdc-checkbox-indeterminate-change-duration linear 0s mdc-checkbox-indeterminate-checked-checkmark;
     }
 
     .mdc-checkbox__mixedmark {
-      animation: $_mdc-checkbox-indeterminate-change-duration linear 0s mdc-checkbox-indeterminate-checked-mixedmark;
       transition: none;
+      animation: $_mdc-checkbox-indeterminate-change-duration linear 0s mdc-checkbox-indeterminate-checked-mixedmark;
     }
   }
 
   &-indeterminate-unchecked {
     .mdc-checkbox__mixedmark {
-      animation: $_mdc-checkbox-indeterminate-change-duration * .6 linear 0s mdc-checkbox-indeterminate-unchecked-mixedmark;
       transition: none;
+      animation: $_mdc-checkbox-indeterminate-change-duration * .6 linear 0s mdc-checkbox-indeterminate-unchecked-mixedmark;
     }
   }
 }

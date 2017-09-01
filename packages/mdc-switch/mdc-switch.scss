@@ -90,14 +90,13 @@
         mdc-switch-transition(background-color);
       border-radius: $mdc-switch-knob-diameter / 2;
       background-color: $mdc-switch-unchecked-knob-color;
+      z-index: 1;
 
       @include mdc-theme-dark(".mdc-switch") {
         background-color: $mdc-switch-unchecked-knob-color-dark;
       }
 
       @include mdc-elevation(2);
-
-      z-index: 1;
 
       // postcss-bem-linter: ignore
       &::before {

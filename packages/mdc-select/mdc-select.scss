@@ -31,13 +31,6 @@
   @include mdc-theme-prop(color, text-primary-on-light);
   @include mdc-rtl-reflexive-box(padding, right, $dd-arrow-padding);
 
-  // Resets for <select> element
-  appearance: none;
-
-  &::-ms-expand {
-    display: none;
-  }
-
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -52,12 +45,18 @@
   background: none;
   background-repeat: no-repeat;
   background-position: right center;
-
-  @include mdc-select-dd-arrow-svg-bg_;
-
   font-family: Roboto, sans-serif;
   font-size: .936rem;
   cursor: pointer;
+
+  // Resets for <select> element
+  appearance: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  @include mdc-select-dd-arrow-svg-bg_;
 
   &:focus {
     @include mdc-theme-prop(border-bottom-color, primary);
@@ -89,8 +88,8 @@
     left: 0;
     max-height: 100%;
     transform-origin: center center;
-    overflow-y: scroll;
     z-index: 4; // Should pop up above everything else. temporary-drawer is next highest at 3.
+    overflow-y: scroll;
   }
 
   &__selected-text {
@@ -183,10 +182,11 @@
 
 // postcss-bem-linter: define multi-select
 .mdc-multi-select {
-  appearance: none;
   width: 250px;
   padding: 0;
   border: 1px solid;
+  outline: none;
+  appearance: none;
 
   @include mdc-theme-prop(border-color, text-hint-on-light);
 
@@ -194,20 +194,17 @@
     @include mdc-theme-prop(border-color, text-hint-on-dark);
   }
 
-  outline: none;
-
   // stylelint-disable plugin/selector-bem-pattern
   .mdc-list-group {
     margin: 16px 0 0;
     padding: 0 0 0 16px;
+    font-weight: normal;
 
     @include mdc-theme-prop(color, text-hint-on-light);
 
     @include mdc-theme-dark {
       @include mdc-theme-prop(color, text-hint-on-dark);
     }
-
-    font-weight: normal;
 
     &:last-child {
       margin-bottom: 16px;

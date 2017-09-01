@@ -157,10 +157,10 @@ $mdc-grid-list-tile-secondary-icon-size: 24px;
 
   &__secondary {
     position: absolute;
-    box-sizing: border-box;
     bottom: 0;
     height: $mdc-grid-list-oneline-cap-secondary-height;
     padding: $mdc-grid-list-tile-secondary-padding;
+    box-sizing: border-box;
 
     @include mdc-theme-prop(background-color, primary);
     @include mdc-theme-prop(color, text-primary-on-primary);

@@ -49,25 +49,23 @@ $mdc-dialog-dark-theme-bg-color: #303030 !default;
     justify-content: center;
     width: 100%;
     height: 100%;
-
-    @include mdc-theme-prop(background-color, text-primary-on-light);
-
     opacity: 0;
     z-index: -1;
+
+    @include mdc-theme-prop(background-color, text-primary-on-light);
   }
 
   &__surface {
     display: inline-flex;
     flex-direction: column;
-
-    @include mdc-elevation(24);
-
     width: calc(100% - 30px);
     min-width: 640px;
     max-width: 865px;
     transform: translateY(150px) scale(.8);
     border-radius: 2px;
+    opacity: 0;
 
+    @include mdc-elevation(24);
     @include mdc-theme-prop(background-color, background);
 
     @include mdc-theme-dark(".mdc-dialog") {
@@ -80,8 +78,6 @@ $mdc-dialog-dark-theme-bg-color: #303030 !default;
     @include mdc-rtl(".mdc-dialog") {
       text-align: right;
     }
-
-    opacity: 0;
   }
 
   &__header {

@@ -39,12 +39,12 @@ $mdc-radio-transition-duration: 120ms;
 
   display: inline-block;
   position: relative;
-  box-sizing: border-box;
   flex: 0 0 auto;
   width: $mdc-radio-touch-area;
   height: $mdc-radio-touch-area;
   padding: ($mdc-radio-touch-area - $mdc-radio-ui-size) / 2;
   cursor: pointer;
+  box-sizing: border-box;
   will-change: opacity, transform, border-color, background-color, color;
 
   &::before,

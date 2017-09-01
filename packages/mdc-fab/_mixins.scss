@@ -50,12 +50,12 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  overflow: hidden;
   user-select: none;
   box-sizing: border-box;
   fill: currentColor;
   -moz-appearance: none;
   -webkit-appearance: none;
-  overflow: hidden;
 
   @include mdc-elevation(6);
 

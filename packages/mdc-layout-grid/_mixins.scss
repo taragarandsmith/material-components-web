@@ -96,15 +96,14 @@
     @error "Invalid style specified! Choose one of #{map-keys($mdc-layout-grid-columns)}";
   }
 
-  box-sizing: border-box;
   margin: 0 auto;
+  padding: $margin;
+  padding: var(--mdc-layout-grid-margin-#{$size}, #{$margin});
+  box-sizing: border-box;
 
   @if $max-width {
     max-width: $max-width;
   }
-
-  padding: $margin;
-  padding: var(--mdc-layout-grid-margin-#{$size}, #{$margin});
 }
 
 @mixin mdc-layout-grid-inner($size, $margin, $gutter) {
@@ -120,9 +119,9 @@
 
   @supports (display: grid) {
     display: grid;
+    margin: 0;
     grid-gap: $gutter;
     grid-gap: var(--mdc-layout-grid-gutter-#{$size}, $gutter);
-    margin: 0;
     grid-template-columns: repeat(map-get($mdc-layout-grid-columns, $size), minmax(0, 1fr));
   }
 }
@@ -132,9 +131,9 @@
     @error "Invalid style specified! Choose one of #{map-keys($mdc-layout-grid-columns)}";
   }
 
-  box-sizing: border-box;
   margin: $gutter / 2;
   margin: calc(var(--mdc-layout-grid-gutter-#{$size}, #{$gutter}) / 2);
+  box-sizing: border-box;
 
   @supports (display: grid) {
     margin: 0;
