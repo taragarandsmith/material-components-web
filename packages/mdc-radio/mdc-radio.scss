@@ -17,7 +17,6 @@
 @import "@material/animation/functions";
 @import "@material/ripple/mixins";
 @import "@material/theme/mixins";
-
 $mdc-radio-touch-area: 40px;
 $mdc-radio-ui-size: 20px;
 $mdc-radio-ui-pct: percentage($mdc-radio-ui-size / $mdc-radio-touch-area);
@@ -34,17 +33,17 @@ $mdc-radio-transition-duration: 120ms;
 // postcss-bem-linter: define radio
 .mdc-radio {
   @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", theme-style: primary, opacity: .14));
-  @include mdc-ripple-fg((pseudo: "::after", theme-style: primary, opacity: .14));
+  @include mdc-ripple-bg((pseudo: ": : before", theme-style: primary, opacity: .14));
+  @include mdc-ripple-fg((pseudo: ": : after", theme-style: primary, opacity: .14));
 
   display: inline-block;
   position: relative;
-  box-sizing: border-box;
   flex: 0 0 auto;
   width: $mdc-radio-touch-area;
   height: $mdc-radio-touch-area;
   padding: ($mdc-radio-touch-area - $mdc-radio-ui-size) / 2;
   cursor: pointer;
+  box-sizing: border-box;
   will-change: opacity, transform, border-color, background-color, color;
 
   &::before,
@@ -182,19 +181,19 @@ fieldset:disabled .mdc-radio__native-control,
     cursor: default;
 
     .mdc-radio__outer-circle {
-      border-color: rgba(black, .26);
 
       @include mdc-theme-dark(".mdc-radio") {
         border-color: rgba(white, .3);
       }
+      border-color: rgba(black, .26);
     }
 
     .mdc-radio__inner-circle {
-      background-color: rgba(black, .26);
 
       @include mdc-theme-dark(".mdc-radio") {
         background-color: rgba(white, .3);
       }
+      background-color: rgba(black, .26);
     }
   }
 }

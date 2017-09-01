@@ -17,7 +17,6 @@
 @import "@material/rtl/mixins";
 @import "@material/theme/mixins";
 @import "@material/typography/mixins";
-
 $mdc-form-field-item-spacing: 4px;
 
 /* stylelint-disable selector-max-type */
@@ -25,18 +24,8 @@ $mdc-form-field-item-spacing: 4px;
   @include mdc-typography(body1);
   @include mdc-theme-prop(color, text-primary-on-light);
 
-  display: inline-flex;
-  align-items: center;
-  vertical-align: middle;
-
   @include mdc-theme-dark {
     @include mdc-theme-prop(color, text-primary-on-dark);
-  }
-
-  > label {
-    order: 0;
-    margin-right: auto;
-    padding-left: $mdc-form-field-item-spacing;
   }
 
   @include mdc-rtl {
@@ -45,20 +34,30 @@ $mdc-form-field-item-spacing: 4px;
       padding-right: $mdc-form-field-item-spacing;
     }
   }
+
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+
+  > label {
+    order: 0;
+    margin-right: auto;
+    padding-left: $mdc-form-field-item-spacing;
+  }
 }
 
 .mdc-form-field--align-end {
-  > label {
-    order: -1;
-    margin-left: auto;
-    padding-right: $mdc-form-field-item-spacing;
-  }
 
   @include mdc-rtl {
     > label {
       margin-right: auto;
       padding-left: $mdc-form-field-item-spacing;
     }
+  }
+  > label {
+    order: -1;
+    margin-left: auto;
+    padding-right: $mdc-form-field-item-spacing;
   }
 }
 /* stylelint-enable selector-max-type */

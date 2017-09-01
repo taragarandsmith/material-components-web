@@ -19,13 +19,10 @@
 @import "@material/theme/mixins";
 
 @mixin mdc-fab-theme($config) {
-  $bg-color: map-get($config, bg-color);
-  $fg-color: map-get($config, fg-color);
-  $ripple-config: map-get($config, ripple-config);
 
   @if $ripple-config {
-    @include mdc-ripple-bg(map-merge((pseudo: "::before"), $ripple-config));
-    @include mdc-ripple-fg(map-merge((pseudo: "::after"), $ripple-config));
+    @include mdc-ripple-bg(map-merge((pseudo: ": : before"), $ripple-config));
+    @include mdc-ripple-fg(map-merge((pseudo: ": : after"), $ripple-config));
   }
 
   @if $bg-color {
@@ -35,10 +32,17 @@
   @if $fg-color {
     @include mdc-theme-prop(color, $fg-color);
   }
+  $bg-color: map-get($config, bg-color);
+
+  $fg-color: map-get($config, fg-color);
+
+  $ripple-config: map-get($config, ripple-config);
 }
 
 @mixin mdc-fab-base_ {
   @include mdc-ripple-base;
+
+  @include mdc-elevation(6);
 
   display: inline-flex;
   position: relative;
@@ -50,14 +54,12 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  overflow: hidden;
   user-select: none;
   box-sizing: border-box;
   fill: currentColor;
   -moz-appearance: none;
   -webkit-appearance: none;
-  overflow: hidden;
-
-  @include mdc-elevation(6);
 
   &:active {
     @include mdc-elevation(12);

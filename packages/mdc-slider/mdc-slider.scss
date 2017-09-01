@@ -18,7 +18,6 @@
 @import "@material/typography/mixins";
 @import "@material/rtl/mixins";
 @import "./variables";
-
 $mdc-slider-main-grey: #bdbdbd;
 $mdc-slider-dark-theme-grey: #5c5c5c;
 
@@ -30,8 +29,8 @@ $mdc-slider-dark-theme-grey: #5c5c5c;
   }
 
   50% {
-    animation-timing-function: ease-in;
     transform: scale(.85);
+    animation-timing-function: ease-in;
   }
 
   100% {
@@ -52,53 +51,53 @@ $mdc-slider-dark-theme-grey: #5c5c5c;
   }
 
   &__track-container {
+
+    @include mdc-theme-dark(".mdc-slider") {
+      background-color: $mdc-slider-dark-theme-grey;
+    }
     position: absolute;
     top: 50%;
     width: 100%;
     height: 2px;
     background-color: $mdc-slider-main-grey;
     overflow: hidden;
-
-    @include mdc-theme-dark(".mdc-slider") {
-      background-color: $mdc-slider-dark-theme-grey;
-    }
   }
 
   &__track {
     @include mdc-theme-prop(background-color, primary);
+
+    @include mdc-rtl(".mdc-slider") {
+      transform-origin: right top;
+    }
 
     position: absolute;
     width: 100%;
     height: 100%;
     transform-origin: left top;
     will-change: transform;
-
-    @include mdc-rtl(".mdc-slider") {
-      transform-origin: right top;
-    }
   }
 
   &__track-marker-container {
-    display: flex;
-    margin-right: 0;
-    margin-left: -1px;
-    visibility: hidden;
 
     @include mdc-rtl(".mdc-slider") {
       margin-right: -1px;
       margin-left: 0;
     }
+    display: flex;
+    margin-right: 0;
+    margin-left: -1px;
+    visibility: hidden;
 
     &::after {
+
+      @include mdc-theme-dark(".mdc-slider", true) {
+        background-color: $mdc-slider-main-grey;
+      }
       display: block;
       width: 2px;
       height: 2px;
       background-color: $mdc-slider-dark-theme-grey;
       content: "";
-
-      @include mdc-theme-dark(".mdc-slider", true) {
-        background-color: $mdc-slider-main-grey;
-      }
     }
   }
 
@@ -106,15 +105,15 @@ $mdc-slider-dark-theme-grey: #5c5c5c;
     flex: 1;
 
     &::after {
+
+      @include mdc-theme-dark(".mdc-slider", true) {
+        background-color: $mdc-slider-main-grey;
+      }
       display: block;
       width: 2px;
       height: 2px;
       background-color: $mdc-slider-dark-theme-grey;
       content: "";
-
-      @include mdc-theme-dark(".mdc-slider", true) {
-        background-color: $mdc-slider-main-grey;
-      }
     }
 
     &:first-child::after {
@@ -209,25 +208,25 @@ $mdc-slider-dark-theme-grey: #5c5c5c;
   cursor: auto;
 
   .mdc-slider__track {
-    background-color: $mdc-slider-main-grey;
 
     @include mdc-theme-dark(".mdc-slider", true) {
       background-color: $mdc-slider-dark-theme-grey;
     }
+    background-color: $mdc-slider-main-grey;
   }
 
   // We use !important here to override all styles without having to use excessive
   // :not() selectors or intricate compound selectors.
   .mdc-slider__thumb {
-    fill: $mdc-slider-main-grey !important;
-    stroke: $mdc-slider-default-assumed-bg-color !important;
-    stroke: var(--mdc-slider-bg-color-behind-component, $mdc-slider-default-assumed-bg-color) !important;
 
     @include mdc-theme-dark(".mdc-slider", true) {
       fill: $mdc-slider-dark-theme-grey !important;
       stroke: $mdc-slider-dark-theme-assumed-bg-color !important;
       stroke: var(--mdc-slider-bg-color-behind-component, $mdc-slider-dark-theme-assumed-bg-color) !important;
     }
+    fill: $mdc-slider-main-grey !important;
+    stroke: $mdc-slider-default-assumed-bg-color !important;
+    stroke: var(--mdc-slider-bg-color-behind-component, $mdc-slider-default-assumed-bg-color) !important;
   }
 }
 
@@ -238,44 +237,44 @@ $mdc-slider-dark-theme-grey: #5c5c5c;
 
   // stylelint-disable-next-line plugin/selector-bem-pattern
   .mdc-slider__thumb {
-    fill: $mdc-slider-default-assumed-bg-color;
-    fill: var(--mdc-slider-bg-color-behind-component, $mdc-slider-default-assumed-bg-color);
-    stroke: $mdc-slider-main-grey;
 
     @include mdc-theme-dark(".mdc-slider", true) {
       fill: $mdc-slider-dark-theme-assumed-bg-color;
       fill: var(--mdc-slider-bg-color-behind-component, $mdc-slider-dark-theme-assumed-bg-color);
       stroke: $mdc-slider-dark-theme-grey;
     }
+    fill: $mdc-slider-default-assumed-bg-color;
+    fill: var(--mdc-slider-bg-color-behind-component, $mdc-slider-default-assumed-bg-color);
+    stroke: $mdc-slider-main-grey;
   }
 
   .mdc-slider__pin {
-    background-color: $mdc-slider-main-grey;
 
     @include mdc-theme-dark(".mdc-slider", true) {
       background-color: $mdc-slider-dark-theme-grey;
     }
+    background-color: $mdc-slider-main-grey;
   }
 
   // stylelint-disable plugin/selector-bem-pattern
   &.mdc-slider--focus {
     .mdc-slider__thumb {
-      fill: #dedede;
 
       @include mdc-theme-dark(".mdc-slider", true) {
         fill: #82848c;
         stroke: #82848c;
       }
+      fill: #dedede;
     }
   }
 
   &.mdc-slider--active.mdc-slider--focus {
     .mdc-slider__thumb {
-      stroke: #8c8c8c;
 
       @include mdc-theme-dark(".mdc-slider", true) {
         stroke: $mdc-slider-dark-theme-grey;
       }
+      stroke: #8c8c8c;
     }
   }
 
@@ -299,8 +298,6 @@ $mdc-slider-dark-theme-grey: #5c5c5c;
 // When a user clicks somewhere on the track that is not directly the slider
 // thumb container, we transition to the place where the user clicked.
 .mdc-slider--in-transit,
-// When a user is using the arrow keys to modify the value of the slider rather
-// than dragging with a pointer, we transition from one value to another.
 .mdc-slider:focus:not(.mdc-slider--active) {
   .mdc-slider__thumb-container,
   .mdc-slider__track {

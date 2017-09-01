@@ -29,10 +29,7 @@
     @error "$z-value must be between 0 and 24";
   }
 
-  #{$mdc-elevation-property}:
-    #{"#{map-get($mdc-elevation-umbra-map, $z-value)} #{$mdc-elevation-umbra-color}"},
-    #{"#{map-get($mdc-elevation-penumbra-map, $z-value)} #{$mdc-elevation-penumbra-color}"},
-    #{map-get($mdc-elevation-ambient-map, $z-value)} $mdc-elevation-ambient-color;
+  #{$mdc-elevation-property}: #{"#{map-get($mdc-elevation-umbra-map, $z-value)} #{$mdc-elevation-umbra-color}"}, #{"#{map-get($mdc-elevation-penumbra-map, $z-value)} #{$mdc-elevation-penumbra-color}"}, #{map-get($mdc-elevation-ambient-map, $z-value)} $mdc-elevation-ambient-color;
 }
 
 /**
@@ -47,9 +44,7 @@
  * }
  * ```
  */
-@function mdc-elevation-transition-rule(
-  $duration: $mdc-elevation-transition-duration,
-  $easing: $mdc-elevation-transition-timing-function) {
+@function mdc-elevation-transition-rule($duration: $mdc-elevation-transition-duration, $easing: $mdc-elevation-transition-timing-function) {
   @return #{$mdc-elevation-property} #{$duration} #{$easing};
 }
 
@@ -60,9 +55,7 @@
  */
 // NOTE(traviskaufman): Both this mixin and the above function use default parameters so they can
 // be used in the same way by clients.
-@mixin mdc-elevation-transition(
-  $duration: $mdc-elevation-transition-duration,
-  $easing: $mdc-elevation-transition-timing-function) {
+@mixin mdc-elevation-transition($duration: $mdc-elevation-transition-duration, $easing: $mdc-elevation-transition-timing-function) {
   transition: mdc-elevation-transition-rule($duration, $easing);
   will-change: $mdc-elevation-property;
 }

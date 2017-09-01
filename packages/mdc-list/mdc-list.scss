@@ -17,7 +17,6 @@
 @import "@material/theme/mixins";
 @import "@material/typography/mixins";
 @import "@material/typography/variables";
-
 $mdc-list-side-padding: 16px;
 
 // Sets the width and height of a detail element to the specified dimension.
@@ -30,12 +29,14 @@ $mdc-list-side-padding: 16px;
 // the start detail element such that the text is always offset by 72px, which is defined within
 // the spec.
 @mixin mdc-list-start-detail-size_($size) {
-  $text-offset: 72px;
-  $side-padding: $mdc-list-side-padding;
-  $margin-value: $text-offset - $side-padding - $size;
 
   @include mdc-list-detail-size_($size);
   @include mdc-rtl-reflexive-box(margin, right, $margin-value, ".mdc-list-item");
+  $text-offset: 72px;
+
+  $side-padding: $mdc-list-side-padding;
+
+  $margin-value: $text-offset - $side-padding - $size;
 }
 
 // postcss-bem-linter: define list
@@ -153,9 +154,14 @@ a.mdc-list-item {
 
 .mdc-list-item.mdc-ripple-upgraded {
   @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before"));
-  @include mdc-ripple-fg((pseudo: "::after"));
+  @include mdc-ripple-bg((pseudo: ": : before"));
+  @include mdc-ripple-fg((pseudo: ": : after"));
   @include mdc-rtl-reflexive-position(left, $mdc-list-side-padding * -1);
+
+  @include mdc-theme-dark(".mdc-list") {
+    @include mdc-ripple-bg((pseudo: ": : before", base-color: white, opacity: .12));
+    @include mdc-ripple-fg((pseudo: ": : after", base-color: white, opacity: .12));
+  }
 
   position: relative;
   // Cause the upgraded list item to cover the entirety of the list, causing ripples to emanate
@@ -167,30 +173,25 @@ a.mdc-list-item {
   &:focus {
     outline: none;
   }
-
-  @include mdc-theme-dark(".mdc-list") {
-    @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .12));
-    @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .12));
-  }
 }
 
 // postcss-bem-linter: define list-divider
 
 .mdc-list-divider {
-  height: 0;
-  margin: 0;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, .12);
 
   @include mdc-theme-dark(".mdc-list") {
     border-bottom-color: rgba(255, 255, 255, .2);
   }
+  height: 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
 }
 
 .mdc-list-divider--inset {
-  $mdc-list-divider-inset-amt: /* text offset */ 72px - /* padding offset */ $mdc-list-side-padding;
 
   @include mdc-rtl-reflexive-box(margin, left, $mdc-list-divider-inset-amt, ".mdc-list-group");
+  $mdc-list-divider-inset-amt: 72px - $mdc-list-side-padding;
 
   width: calc(100% - #{$mdc-list-divider-inset-amt});
 }
@@ -203,10 +204,6 @@ a.mdc-list-item {
   padding: 0 $mdc-list-side-padding;
 
   &__subheader {
-    $mdc-list-subheader-virtual-height: 3rem;
-    $mdc-list-subheader-leading: map-get(map-get($mdc-typography-styles, body2), line-height);
-    $mdc-list-subheader-margin:
-      ($mdc-list-subheader-virtual-height - $mdc-list-subheader-leading) / 2;
 
     @include mdc-typography(body2);
     @include mdc-theme-prop(color, text-primary-on-background);
@@ -214,6 +211,11 @@ a.mdc-list-item {
     @include mdc-theme-dark {
       @include mdc-theme-prop(color, text-primary-on-dark);
     }
+    $mdc-list-subheader-virtual-height: 3rem;
+
+    $mdc-list-subheader-leading: map-get(map-get($mdc-typography-styles, body2), line-height);
+
+    $mdc-list-subheader-margin: ($mdc-list-subheader-virtual-height - $mdc-list-subheader-leading) / 2;
 
     margin: $mdc-list-subheader-margin 0;
   }

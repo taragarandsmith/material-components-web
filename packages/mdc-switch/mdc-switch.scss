@@ -41,6 +41,10 @@
   }
 
   &__background {
+
+    @include mdc-theme-dark(".mdc-switch") {
+      background-color: transparent;
+    }
     display: block;
     position: relative;
     width: $mdc-switch-track-width;
@@ -51,33 +55,33 @@
     cursor: pointer;
     user-select: none;
 
-    @include mdc-theme-dark(".mdc-switch") {
-      background-color: transparent;
-    }
-
     &::before {
+
+      @include mdc-theme-dark(".mdc-switch") {
+        background-color: $mdc-switch-unchecked-track-color-dark;
+        opacity: .3;
+      }
       display: block;
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      transition:
-        mdc-switch-transition(opacity),
-        mdc-switch-transition(background-color);
+      transition: mdc-switch-transition(opacity), mdc-switch-transition(background-color);
       border-radius: 7px;
       background-color: $mdc-switch-unchecked-track-color;
       content: "";
       opacity: .38;
-
-      @include mdc-theme-dark(".mdc-switch") {
-        background-color: $mdc-switch-unchecked-track-color-dark;
-        opacity: .3;
-      }
     }
 
     // postcss-bem-linter: ignore
     .mdc-switch__knob {
+
+      @include mdc-theme-dark(".mdc-switch") {
+        background-color: $mdc-switch-unchecked-knob-color-dark;
+      }
+
+      @include mdc-elevation(2);
       display: block;
       position: absolute;
       top: -3px;
@@ -85,17 +89,9 @@
       width: $mdc-switch-knob-diameter;
       height: $mdc-switch-knob-diameter;
       transform: translateX(0);
-      transition:
-        mdc-switch-transition(transform),
-        mdc-switch-transition(background-color);
+      transition: mdc-switch-transition(transform), mdc-switch-transition(background-color);
       border-radius: $mdc-switch-knob-diameter / 2;
       background-color: $mdc-switch-unchecked-knob-color;
-
-      @include mdc-theme-dark(".mdc-switch") {
-        background-color: $mdc-switch-unchecked-knob-color-dark;
-      }
-
-      @include mdc-elevation(2);
 
       z-index: 1;
 
@@ -107,9 +103,7 @@
         width: $mdc-switch-focus-ring-diameter;
         height: $mdc-switch-focus-ring-diameter;
         transform: scale(0);
-        transition:
-          mdc-switch-transition(transform),
-          mdc-switch-transition(background-color);
+        transition: mdc-switch-transition(transform), mdc-switch-transition(background-color);
         border-radius: $mdc-switch-focus-ring-diameter / 2;
         background-color: transparent;
         content: "";
@@ -122,20 +116,18 @@
 .mdc-switch__native-control:focus ~ .mdc-switch__background {
   .mdc-switch__knob {
     &::before {
-      position: absolute;
-      width: $mdc-switch-focus-ring-diameter;
-      height: $mdc-switch-focus-ring-diameter;
-      transform: scale(1);
-      transition:
-        mdc-switch-transition(transform),
-        mdc-switch-transition(background-color);
-      border-radius: $mdc-switch-focus-ring-diameter / 2;
-      background-color: $mdc-switch-unchecked-focus-ring-color;
 
       @include mdc-theme-dark(".mdc-switch") {
         background-color: $mdc-switch-unchecked-focus-ring-color-dark;
         opacity: .14;
       }
+      position: absolute;
+      width: $mdc-switch-focus-ring-diameter;
+      height: $mdc-switch-focus-ring-diameter;
+      transform: scale(1);
+      transition: mdc-switch-transition(transform), mdc-switch-transition(background-color);
+      border-radius: $mdc-switch-focus-ring-diameter / 2;
+      background-color: $mdc-switch-unchecked-focus-ring-color;
     }
   }
 }
@@ -148,12 +140,10 @@
   }
 
   .mdc-switch__knob {
-    transform: translateX($mdc-switch-track-width - $mdc-switch-knob-diameter);
-    transition:
-      mdc-switch-transition(transform),
-      mdc-switch-transition(background-color);
 
     @include mdc-theme-prop(background-color, primary);
+    transform: translateX($mdc-switch-track-width - $mdc-switch-knob-diameter);
+    transition: mdc-switch-transition(transform), mdc-switch-transition(background-color);
 
     &::before {
       @include mdc-theme-prop(background-color, primary);
@@ -175,20 +165,20 @@
 
 .mdc-switch__native-control:disabled ~ .mdc-switch__background {
   &::before {
-    background-color: $mdc-switch-unchecked-track-color;
-    opacity: .12;
 
     @include mdc-theme-dark(".mdc-switch") {
       background-color: $mdc-switch-unchecked-track-color-dark;
       opacity: .1;
     }
+    background-color: $mdc-switch-unchecked-track-color;
+    opacity: .12;
   }
 
   .mdc-switch__knob {
-    background-color: $mdc-switch-disabled-knob-color;
 
     @include mdc-theme-dark(".mdc-switch") {
       background-color: $mdc-switch-disabled-knob-color-dark;
     }
+    background-color: $mdc-switch-disabled-knob-color;
   }
 }

@@ -22,8 +22,8 @@
 
 .mdc-ripple-surface {
   @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before"));
-  @include mdc-ripple-fg((pseudo: "::after"));
+  @include mdc-ripple-bg((pseudo: ": : before"));
+  @include mdc-ripple-fg((pseudo: ": : after"));
 
   position: relative;
   outline: none;
@@ -34,23 +34,23 @@
   }
 
   &--primary {
+
+    @include mdc-ripple-bg((pseudo: ": : before", theme-style: primary, opacity: .16));
+    @include mdc-ripple-fg((pseudo: ": : after", theme-style: primary, opacity: .16));
     &::before,
     &::after {
       @include mdc-theme-prop(background-color, primary);
     }
-
-    @include mdc-ripple-bg((pseudo: "::before", theme-style: primary, opacity: .16));
-    @include mdc-ripple-fg((pseudo: "::after", theme-style: primary, opacity: .16));
   }
 
   &--accent {
+
+    @include mdc-ripple-bg((pseudo: ": : before", theme-style: secondary, opacity: .16));
+    @include mdc-ripple-fg((pseudo: ": : after", theme-style: secondary, opacity: .16));
     &::before,
     &::after {
       @include mdc-theme-prop(background-color, primary);
     }
-
-    @include mdc-ripple-bg((pseudo: "::before", theme-style: secondary, opacity: .16));
-    @include mdc-ripple-fg((pseudo: "::after", theme-style: secondary, opacity: .16));
   }
 }
 

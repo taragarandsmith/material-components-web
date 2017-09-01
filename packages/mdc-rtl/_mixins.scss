@@ -135,15 +135,17 @@
     @error "Invalid default direction #{default-direction}. Please specifiy either right or left";
   }
 
-  $left-value: $value;
-  $right-value: 0;
-
   @if ($default-direction == right) {
     $left-value: 0;
+
     $right-value: $value;
   }
 
   @include mdc-rtl-reflexive-property($base-property, $left-value, $right-value, $root-selector);
+
+  $left-value: $value;
+
+  $right-value: 0;
 }
 
 /**
@@ -173,10 +175,11 @@
  * A 4th optional $root-selector argument can be given, which will be passed to `mdc-rtl`.
  */
 @mixin mdc-rtl-reflexive-property($base-property, $left-value, $right-value, $root-selector: null) {
-  $prop-left: #{$base-property}-left;
-  $prop-right: #{$base-property}-right;
 
   @include mdc-rtl-reflexive_($prop-left, $left-value, $prop-right, $right-value, $root-selector);
+  $prop-left: #{$base-property}-left;
+
+  $prop-right: #{$base-property}-right;
 }
 
 /**
@@ -211,29 +214,25 @@
     @error "Invalid position #{position-property}. Please specifiy either right or left";
   }
 
-  $left-value: $value;
-  $right-value: initial;
-
   @if ($position-property == right) {
     $right-value: $value;
+
     $left-value: initial;
   }
 
   @include mdc-rtl-reflexive_(left, $left-value, right, $right-value, $root-selector);
+
+  $left-value: $value;
+
+  $right-value: initial;
 }
 
-@mixin mdc-rtl-reflexive_(
-  $left-property,
-  $left-value,
-  $right-property,
-  $right-value,
-  $root-selector: null
-) {
-  #{$left-property}: $left-value;
-  #{$right-property}: $right-value;
+@mixin mdc-rtl-reflexive_($left-property, $left-value, $right-property, $right-value, $root-selector: null) {
 
   @include mdc-rtl($root-selector) {
     #{$left-property}: $right-value;
     #{$right-property}: $left-value;
   }
+  #{$left-property}: $left-value;
+  #{$right-property}: $right-value;
 }

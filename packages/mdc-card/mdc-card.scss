@@ -27,9 +27,9 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 0;
-  box-sizing: border-box;
   border-radius: 2px;
   overflow: hidden;
+  box-sizing: border-box;
 
   &__primary {
     padding: 16px;
@@ -46,8 +46,6 @@
   }
 
   &__supporting-text {
-    padding: 8px 16px;
-    box-sizing: border-box;
 
     @include mdc-typography(body1);
     @include mdc-theme-prop(color, text-primary-on-light);
@@ -55,6 +53,8 @@
     @include mdc-theme-dark(".mdc-card") {
       @include mdc-theme-prop(color, text-primary-on-dark);
     }
+    padding: 8px 16px;
+    box-sizing: border-box;
 
     // Remove top padding if immediately preceded by a primary block.
     .mdc-card__primary + & {
@@ -69,22 +69,22 @@
   }
 
   &__actions {
-    display: flex;
-    padding: 8px;
-    box-sizing: border-box;
 
     // Adjust text color for dark theme.
     @include mdc-theme-dark(".mdc-card") {
       @include mdc-theme-prop(color, text-primary-on-dark);
     }
+    display: flex;
+    padding: 8px;
+    box-sizing: border-box;
 
     // Tweak button paddings and margins when they're used as actions
     .mdc-card__action {
-      margin: 0 8px 0 0;
 
       @include mdc-rtl {
         margin: 0 0 0 8px;
       }
+      margin: 0 8px 0 0;
     }
 
     .mdc-card__action:last-child {
@@ -115,11 +115,6 @@
   }
 
   &__media-item {
-    display: inline-block;
-    width: auto;
-    height: 80px;
-    margin: 16px 0 0;
-    padding: 0;
 
     @each $mult, $name in (1.5: "1dot5", 2: "2", 3: "3") {
       // postcss-bem-linter: ignore
@@ -128,6 +123,11 @@
         height: $mult * 80px;
       }
     }
+    display: inline-block;
+    width: auto;
+    height: 80px;
+    margin: 16px 0 0;
+    padding: 0;
   }
 
   &__title {
@@ -161,14 +161,14 @@
   }
 
   &__horizontal-block {
+
+    @include mdc-rtl-reflexive-property(padding, 0, 16px);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    box-sizing: border-box;
     padding: 0;
-
-    @include mdc-rtl-reflexive-property(padding, 0, 16px);
+    box-sizing: border-box;
 
     // postcss-bem-linter: ignore
     .mdc-card__actions--vertical {

@@ -19,11 +19,7 @@
 
 .mdc-fab {
   @include mdc-fab-base_;
-  @include mdc-fab-theme((
-    bg-color: secondary,
-    fg-color: text-primary-on-secondary,
-    ripple-config: (base-color: white, opacity: .16)
-  ));
+  @include mdc-fab-theme(( bg-color: secondary, fg-color: text-primary-on-secondary, ripple-config: (base-color: white, opacity: .16)));
 
   &:not(.mdc-ripple-upgraded) {
     -webkit-tap-highlight-color: rgba(0, 0, 0, .18);
@@ -31,11 +27,7 @@
 }
 
 .mdc-fab--plain {
-  @include mdc-fab-theme((
-    bg-color: white,
-    fg-color: text-primary-on-light,
-    ripple-config: ()
-  ));
+  @include mdc-fab-theme(( bg-color: white, fg-color: text-primary-on-light, ripple-config: ()));
 }
 
 .mdc-fab--mini {

@@ -24,10 +24,21 @@
 // postcss-bem-linter: define button
 .mdc-button {
   @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before"));
-  @include mdc-ripple-fg((pseudo: "::after"));
+  @include mdc-ripple-bg((pseudo: ": : before"));
+  @include mdc-ripple-fg((pseudo: ": : after"));
   @include mdc-typography(button);
   @include mdc-theme-prop(color, text-primary-on-light);
+
+  @include mdc-theme-dark(".mdc-button") {
+    @include mdc-ripple-base;
+    @include mdc-ripple-bg((pseudo: ": : before", base-color: white, opacity: .16));
+    @include mdc-ripple-fg((pseudo: ": : after", base-color: white, opacity: .16));
+    @include mdc-theme-prop(color, text-primary-on-dark);
+
+    &:not(.mdc-ripple-upgraded) {
+      -webkit-tap-highlight-color: rgba(white, .18);
+    }
+  }
 
   display: inline-block;
   position: relative;
@@ -36,12 +47,12 @@
   padding: 0 16px;
   border: none;
   border-radius: 4px;
-  box-sizing: border-box;
   outline: none;
   background: transparent;
   text-align: center;
   overflow: hidden;
   vertical-align: middle;
+  box-sizing: border-box;
   user-select: none;
   -webkit-appearance: none;
 
@@ -61,17 +72,6 @@
 
   &:not(.mdc-ripple-upgraded) {
     -webkit-tap-highlight-color: rgba(black, .3);
-  }
-
-  @include mdc-theme-dark(".mdc-button") {
-    @include mdc-ripple-base;
-    @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .16));
-    @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .16));
-    @include mdc-theme-prop(color, text-primary-on-dark);
-
-    &:not(.mdc-ripple-upgraded) {
-      -webkit-tap-highlight-color: rgba(white, .18);
-    }
   }
 }
 
@@ -97,13 +97,13 @@
 .mdc-button--stroked {
   @include mdc-theme-prop(border-color, text-primary-on-light);
 
-  border-width: 2px;
-  border-style: solid;
-  line-height: 32px;
-
   @include mdc-theme-dark(".mdc-button") {
     @include mdc-theme-prop(border-color, text-primary-on-dark);
   }
+
+  border-width: 2px;
+  border-style: solid;
+  line-height: 32px;
 
   // postcss-bem-linter: ignore
   &.mdc-button--dense {
@@ -127,29 +127,29 @@
 
   // postcss-bem-linter: ignore
   .mdc-button--#{$modifier} {
-    $theme-value: map-get($mdc-theme-property-values, $theme-style);
 
     @include mdc-ripple-base;
-    @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .16));
-    @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .16));
+    @include mdc-ripple-bg((pseudo: ": : before", base-color: $theme-value, opacity: .16));
+    @include mdc-ripple-fg((pseudo: ": : after", base-color: $theme-value, opacity: .16));
     @include mdc-theme-prop(color, $theme-style);
 
     @include mdc-theme-dark(".mdc-button") {
       @include mdc-ripple-base;
-      @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .16));
-      @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .16));
+      @include mdc-ripple-bg((pseudo: ": : before", base-color: $theme-value, opacity: .16));
+      @include mdc-ripple-fg((pseudo: ": : after", base-color: $theme-value, opacity: .16));
       @include mdc-theme-prop(color, $theme-style);
     }
+    $theme-value: map-get($mdc-theme-property-values, $theme-style);
     // postcss-bem-linter: ignore
     &.mdc-button--raised,
     &.mdc-button--unelevated {
-      $theme-value: map-get($mdc-theme-property-values, text-primary-on-#{$theme-style});
 
       @include mdc-ripple-base;
-      @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .32));
-      @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .32));
+      @include mdc-ripple-bg((pseudo: ": : before", base-color: $theme-value, opacity: .32));
+      @include mdc-ripple-fg((pseudo: ": : after", base-color: $theme-value, opacity: .32));
       @include mdc-theme-prop(background-color, $theme-style);
       @include mdc-theme-prop(color, text-primary-on-#{$theme-style});
+      $theme-value: map-get($mdc-theme-property-values, text-primary-on-#{$theme-style});
     }
     // postcss-bem-linter: ignore
     &.mdc-button--stroked {
@@ -167,13 +167,13 @@
 .mdc-button {
   fieldset:disabled &,
   &:disabled {
-    color: rgba(black, .38);
-    cursor: default;
-    pointer-events: none;
 
     @include mdc-theme-dark(".mdc-button") {
       @include mdc-theme-prop(color, text-disabled-on-dark);
     }
+    color: rgba(black, .38);
+    cursor: default;
+    pointer-events: none;
   }
 }
 
@@ -184,24 +184,24 @@
     @include mdc-elevation(0);
     @include mdc-theme-prop(color, text-primary-on-dark);
 
-    background-color: rgba(black, .15);
-
     @include mdc-theme-dark(".mdc-button") {
       @include mdc-theme-prop(color, text-disabled-on-dark);
 
       background-color: rgba(255, 255, 255, .15);
     }
+
+    background-color: rgba(black, .15);
   }
 }
 
 .mdc-button--stroked {
   fieldset:disabled &,
   &:disabled {
-    border-color: rgba(black, .38);
 
     @include mdc-theme-dark(".mdc-button") {
       @include mdc-theme-prop(border-color, text-disabled-on-dark);
     }
+    border-color: rgba(black, .38);
   }
 }
 // postcss-bem-linter: end

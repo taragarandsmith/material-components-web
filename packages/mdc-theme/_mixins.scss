@@ -32,10 +32,8 @@
 
   @else {
     @if not map-has-key($mdc-theme-property-values, $style) {
-      @error "Invalid style: '#{$style}'. Choose one of: #{map-keys($mdc-theme-property-values)}";
+      @error "Invalid style:"#{$style}". Choose one of: #{map-keys($mdc-theme-property-values)}";
     }
-
-    $value: map-get($mdc-theme-property-values, $style);
 
     @if $important {
       /* @alternate */
@@ -48,6 +46,8 @@
       #{$property}: $value;
       #{$property}: var(--mdc-theme-#{$style}, $value);
     }
+
+    $value: map-get($mdc-theme-property-values, $style);
   }
 }
 

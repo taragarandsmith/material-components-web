@@ -20,16 +20,14 @@
 
 @mixin mdc-button-filled_() {
   @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .32));
-  @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .32));
+  @include mdc-ripple-bg((pseudo: ": : before", base-color: white, opacity: .32));
+  @include mdc-ripple-fg((pseudo: ": : after", base-color: white, opacity: .32));
   @include mdc-theme-prop(color, text-primary-on-dark);
-
-  background-color: black;
 
   @include mdc-theme-dark(".mdc-button") {
     @include mdc-ripple-base;
-    @include mdc-ripple-bg((pseudo: "::before", base-color: black, opacity: .32));
-    @include mdc-ripple-fg((pseudo: "::after", base-color: black, opacity: .32));
+    @include mdc-ripple-bg((pseudo: ": : before", base-color: black, opacity: .32));
+    @include mdc-ripple-fg((pseudo: ": : after", base-color: black, opacity: .32));
     @include mdc-theme-prop(color, text-primary-on-light);
 
     background-color: white;
@@ -38,4 +36,6 @@
       -webkit-tap-highlight-color: rgba(black, .18);
     }
   }
+
+  background-color: black;
 }

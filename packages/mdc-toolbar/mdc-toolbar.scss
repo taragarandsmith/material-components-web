@@ -23,6 +23,9 @@
 
 // postcss-bem-linter: define toolbar
 .mdc-toolbar {
+
+  @include mdc-theme-prop(background-color, primary);
+  @include mdc-theme-prop(color, text-primary-on-primary);
   display: flex;
   position: relative;
   flex-direction: column;
@@ -30,21 +33,10 @@
   width: 100%;
   box-sizing: border-box;
 
-  @include mdc-theme-prop(background-color, primary);
-  @include mdc-theme-prop(color, text-primary-on-primary);
-
   &__row {
-    display: flex;
-    position: relative;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    min-height: $mdc-toolbar-row-height;
-    box-sizing: border-box;
 
     // TODO: refactor this out when #23 is implemented
-    @media (max-width: $mdc-toolbar-mobile-landscape-width-breakpoint)
-      and (orientation: landscape) {
+    @media (max-width: $mdc-toolbar-mobile-landscape-width-breakpoint) and (orientation: landscape) {
       min-height: $mdc-toolbar-mobile-landscape-row-height;
     }
 
@@ -52,6 +44,13 @@
     @media (max-width: $mdc-toolbar-mobile-breakpoint) {
       min-height: $mdc-toolbar-mobile-row-height;
     }
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    min-height: $mdc-toolbar-row-height;
+    box-sizing: border-box;
   }
 
   &__section {
@@ -125,12 +124,12 @@
 }
 
 .mdc-toolbar--fixed {
+
+  @include mdc-elevation(4);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 4;
-
-  @include mdc-elevation(4);
 }
 
 .mdc-toolbar--flexible {
@@ -140,13 +139,13 @@
   // stylelint-enable plugin/selector-bem-pattern
 
   .mdc-toolbar__row:first-child {
-    height: $mdc-toolbar-row-height * $mdc-toolbar-ratio-to-extend-flexible;
-    height: calc(#{$mdc-toolbar-row-height} * var(--mdc-toolbar-ratio-to-extend-flexible, #{$mdc-toolbar-ratio-to-extend-flexible}));
 
     @media (max-width: $mdc-toolbar-mobile-breakpoint) {
       height: $mdc-toolbar-mobile-row-height * $mdc-toolbar-ratio-to-extend-flexible;
       height: calc(#{$mdc-toolbar-mobile-row-height} * var(--mdc-toolbar-ratio-to-extend-flexible, #{$mdc-toolbar-ratio-to-extend-flexible}));
     }
+    height: $mdc-toolbar-row-height * $mdc-toolbar-ratio-to-extend-flexible;
+    height: calc(#{$mdc-toolbar-row-height} * var(--mdc-toolbar-ratio-to-extend-flexible, #{$mdc-toolbar-ratio-to-extend-flexible}));
 
     &::after {
       // The style ensures the pseudo element will be defined and can easily be styled
@@ -211,16 +210,15 @@
 // postcss-bem-linter: end
 
 .mdc-toolbar-fixed-adjust {
-  margin-top: $mdc-toolbar-row-height;
 
-  @media (max-width: $mdc-toolbar-mobile-landscape-width-breakpoint)
-    and (orientation: landscape) {
+  @media (max-width: $mdc-toolbar-mobile-landscape-width-breakpoint) and (orientation: landscape) {
     margin-top: $mdc-toolbar-mobile-landscape-row-height;
   }
 
   @media (max-width: $mdc-toolbar-mobile-breakpoint) {
     margin-top: $mdc-toolbar-mobile-row-height;
   }
+  margin-top: $mdc-toolbar-row-height;
 }
 
 .mdc-toolbar__section--shrink-to-fit {
