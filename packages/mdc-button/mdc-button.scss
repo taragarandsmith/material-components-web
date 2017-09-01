@@ -24,8 +24,8 @@
 // postcss-bem-linter: define button
 .mdc-button {
   @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before"));
-  @include mdc-ripple-fg((pseudo: "::after"));
+  @include mdc-ripple-bg-before(());
+  @include mdc-ripple-fg-after(());
   @include mdc-typography(button);
   @include mdc-theme-prop(color, text-primary-on-light);
 
@@ -65,8 +65,8 @@
 
   @include mdc-theme-dark(".mdc-button") {
     @include mdc-ripple-base;
-    @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .16));
-    @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .16));
+    @include mdc-ripple-bg-before((base-color: white, opacity: .16));
+    @include mdc-ripple-fg-after((base-color: white, opacity: .16));
     @include mdc-theme-prop(color, text-primary-on-dark);
 
     &:not(.mdc-ripple-upgraded) {
@@ -130,14 +130,14 @@
     $theme-value: map-get($mdc-theme-property-values, $theme-style);
 
     @include mdc-ripple-base;
-    @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .16));
-    @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .16));
+    @include mdc-ripple-bg-before((base-color: $theme-value, opacity: .16));
+    @include mdc-ripple-fg-after((base-color: $theme-value, opacity: .16));
     @include mdc-theme-prop(color, $theme-style);
 
     @include mdc-theme-dark(".mdc-button") {
       @include mdc-ripple-base;
-      @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .16));
-      @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .16));
+      @include mdc-ripple-bg-before((base-color: $theme-value, opacity: .16));
+      @include mdc-ripple-fg-after((base-color: $theme-value, opacity: .16));
       @include mdc-theme-prop(color, $theme-style);
     }
     // postcss-bem-linter: ignore
@@ -146,8 +146,8 @@
       $theme-value: map-get($mdc-theme-property-values, text-primary-on-#{$theme-style});
 
       @include mdc-ripple-base;
-      @include mdc-ripple-bg((pseudo: "::before", base-color: $theme-value, opacity: .32));
-      @include mdc-ripple-fg((pseudo: "::after", base-color: $theme-value, opacity: .32));
+      @include mdc-ripple-bg-before((base-color: $theme-value, opacity: .32));
+      @include mdc-ripple-fg-after((base-color: $theme-value, opacity: .32));
       @include mdc-theme-prop(background-color, $theme-style);
       @include mdc-theme-prop(color, text-primary-on-#{$theme-style});
     }
