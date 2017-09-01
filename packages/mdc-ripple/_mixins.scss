@@ -95,6 +95,75 @@
   pointer-events: none;
 }
 
+@mixin mdc-ripple-bg-upgraded_($radius) {
+  top: calc(50% - #{$radius});
+  left: calc(50% - #{$radius});
+  width: $radius * 2;
+  height: $radius * 2;
+
+  /* @alternate */
+  transform: scale(0);
+  transform: scale(var(--mdc-ripple-fg-scale, 0));
+}
+
+@mixin mdc-ripple-bg-focused_() {
+  opacity: .99999;
+}
+
+@mixin mdc-ripple-bg-active-fill_() {
+  transition-duration: 120ms;
+  opacity: 1;
+}
+
+@mixin mdc-ripple-unbounded_($radius) {
+  /* @alternate */
+  top: calc(50% - #{$radius / 2});
+  top: var(--mdc-ripple-top, calc(50% - #{$radius / 2}));
+
+  /* @alternate */
+  left: calc(50% - #{$radius / 2});
+  left: var(--mdc-ripple-left, calc(50% - #{$radius / 2}));
+
+  /* @alternate */
+  width: $radius;
+  width: var(--mdc-ripple-fg-size, $radius);
+
+  /* @alternate */
+  height: $radius;
+  height: var(--mdc-ripple-fg-size, $radius);
+
+  /* @alternate */
+  transform: scale(0);
+  transform: scale(var(--mdc-ripple-fg-scale, 0));
+}
+
+@mixin mdc-ripple-bg-before($config: ()) {
+  $config: map-merge(mdc-ripple-default-config_(), $config);
+  $radius: map-get($config, radius);
+
+  &::before {
+    @include mdc-ripple-bg-base_($config);
+
+    content: "";
+  }
+
+  &.mdc-ripple-upgraded::before {
+    @include mdc-ripple-bg-upgraded_($radius);
+  }
+
+  &.mdc-ripple-upgraded--background-focused::before {
+    @include mdc-ripple-bg-focused_;
+  }
+
+  &.mdc-ripple-upgraded--background-active-fill::before {
+    @include mdc-ripple-bg-active-fill_;
+  }
+
+  &.mdc-ripple-upgraded--unbounded::before {
+    @include mdc-ripple-unbounded_($radius);
+  }
+}
+
 @mixin mdc-ripple-bg($config: ()) {
   $config: map-merge(mdc-ripple-default-config_(), $config);
   $pseudo: map-get($config, pseudo);
@@ -113,45 +182,19 @@
   // stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after
 
   &.mdc-ripple-upgraded#{$pseudo} {
-    top: calc(50% - #{$radius});
-    left: calc(50% - #{$radius});
-    width: $radius * 2;
-    height: $radius * 2;
-
-    /* @alternate */
-    transform: scale(0);
-    transform: scale(var(--mdc-ripple-fg-scale, 0));
+    @include mdc-ripple-bg-upgraded_($radius);
   }
 
   &.mdc-ripple-upgraded--background-focused#{$pseudo} {
-    opacity: .99999;
+    @include mdc-ripple-bg-focused_;
   }
 
   &.mdc-ripple-upgraded--background-active-fill#{$pseudo} {
-    transition-duration: 120ms;
-    opacity: 1;
+    @include mdc-ripple-bg-active-fill_;
   }
 
   &.mdc-ripple-upgraded--unbounded#{$pseudo} {
-    /* @alternate */
-    top: calc(50% - #{$radius / 2});
-    top: var(--mdc-ripple-top, calc(50% - #{$radius / 2}));
-
-    /* @alternate */
-    left: calc(50% - #{$radius / 2});
-    left: var(--mdc-ripple-left, calc(50% - #{$radius / 2}));
-
-    /* @alternate */
-    width: $radius;
-    width: var(--mdc-ripple-fg-size, $radius);
-
-    /* @alternate */
-    height: $radius;
-    height: var(--mdc-ripple-fg-size, $radius);
-
-    /* @alternate */
-    transform: scale(0);
-    transform: scale(var(--mdc-ripple-fg-scale, 0));
+    @include mdc-ripple-unbounded_($radius);
   }
 }
 
@@ -171,6 +214,87 @@
   pointer-events: none;
 }
 
+@mixin mdc-ripple-fg-upgraded_($radius) {
+  top: 0;
+  left: 0;
+
+  /* @alternate */
+  width: $radius;
+  width: var(--mdc-ripple-fg-size, $radius);
+
+  /* @alternate */
+  height: $radius;
+  height: var(--mdc-ripple-fg-size, $radius);
+  transform: scale(0);
+  transform-origin: center center;
+  opacity: 0;
+}
+
+@mixin mdc-ripple-fg-bounded_() {
+  transform-origin: center center;
+}
+
+@mixin mdc-ripple-fg-unbounded_($radius) {
+  /* @alternate */
+  top: 0;
+  top: var(--mdc-ripple-top, 0);
+
+  /* @alternate */
+  left: 0;
+  left: var(--mdc-ripple-left, 0);
+
+  /* @alternate */
+  width: $radius;
+  width: var(--mdc-ripple-fg-size, $radius);
+
+  /* @alternate */
+  height: $radius;
+  height: var(--mdc-ripple-fg-size, $radius);
+  transform: scale(0);
+  transform-origin: center center;
+}
+
+@mixin mdc-ripple-fg-activation_() {
+  animation: 300ms mdc-ripple-fg-radius-in forwards, 83ms mdc-ripple-fg-opacity-in forwards;
+}
+
+@mixin mdc-ripple-fg-deactivation_() {
+  // Retain transform from mdc-ripple-fg-radius-in activation
+  transform: translate(var(--mdc-ripple-fg-translate-end, 0)) scale(var(--mdc-ripple-fg-scale, 1));
+  animation: 83ms mdc-ripple-fg-opacity-out;
+}
+
+@mixin mdc-ripple-fg-after($config: ()) {
+  $config: map-merge(mdc-ripple-default-config_(), $config);
+  $radius: map-get($config, radius);
+
+  &::after {
+    @include mdc-ripple-fg-base_($config);
+
+    content: "";
+  }
+
+  &.mdc-ripple-upgraded::after {
+    @include mdc-ripple-fg-upgraded_($radius);
+  }
+
+  &:not(.mdc-ripple-upgraded--unbounded)::after {
+    @include mdc-ripple-fg-bounded_;
+  }
+
+  &.mdc-ripple-upgraded--unbounded::after {
+    @include mdc-ripple-fg-unbounded_($radius);
+  }
+
+  &.mdc-ripple-upgraded--foreground-activation::after {
+    @include mdc-ripple-fg-activation_;
+  }
+
+  &.mdc-ripple-upgraded--foreground-deactivation::after {
+    @include mdc-ripple-fg-deactivation_;
+  }
+}
+
 @mixin mdc-ripple-fg($config: ()) {
   $config: map-merge(mdc-ripple-default-config_(), $config);
   $pseudo: map-get($config, pseudo);
@@ -180,63 +304,32 @@
   @if ($pseudo) {
     &#{$pseudo} {
       @include mdc-ripple-fg-base_($config);
-
+      
       content: "";
     }
   } @else {
     @include mdc-ripple-fg-base_($config);
   }
   // stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after
+  
 
-  &.mdc-ripple-upgraded {
-    &#{$pseudo} {
-      top: 0;
-      left: 0;
-
-      /* @alternate */
-      width: $radius;
-      width: var(--mdc-ripple-fg-size, $radius);
-
-      /* @alternate */
-      height: $radius;
-      height: var(--mdc-ripple-fg-size, $radius);
-      transform: scale(0);
-      transform-origin: center center;
-      opacity: 0;
-    }
+  &.mdc-ripple-upgraded#{$pseudo} {
+    @include mdc-ripple-fg-upgraded_($radius);
   }
 
   &:not(.mdc-ripple-upgraded--unbounded)#{$pseudo} {
-    transform-origin: center center;
+    @include mdc-ripple-fg-bounded_;
   }
 
   &.mdc-ripple-upgraded--unbounded#{$pseudo} {
-    /* @alternate */
-    top: 0;
-    top: var(--mdc-ripple-top, 0);
-
-    /* @alternate */
-    left: 0;
-    left: var(--mdc-ripple-left, 0);
-
-    /* @alternate */
-    width: $radius;
-    width: var(--mdc-ripple-fg-size, $radius);
-
-    /* @alternate */
-    height: $radius;
-    height: var(--mdc-ripple-fg-size, $radius);
-    transform: scale(0);
-    transform-origin: center center;
+    @include mdc-ripple-fg-unbounded_($radius);
   }
 
   &.mdc-ripple-upgraded--foreground-activation#{$pseudo} {
-    animation: 300ms mdc-ripple-fg-radius-in forwards, 83ms mdc-ripple-fg-opacity-in forwards;
+    @include mdc-ripple-fg-activation_;
   }
 
   &.mdc-ripple-upgraded--foreground-deactivation#{$pseudo} {
-    // Retain transform from mdc-ripple-fg-radius-in activation
-    transform: translate(var(--mdc-ripple-fg-translate-end, 0)) scale(var(--mdc-ripple-fg-scale, 1));
-    animation: 83ms mdc-ripple-fg-opacity-out;
+    @include mdc-ripple-fg-deactivation_;
   }
 }
