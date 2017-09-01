@@ -20,7 +20,6 @@
 
 @function mdc-ripple-default-config_() {
   @return (
-    pseudo: null,
     radius: 100%,
     base-color: black,
     opacity: .06,
@@ -166,35 +165,24 @@
 
 @mixin mdc-ripple-bg($config: ()) {
   $config: map-merge(mdc-ripple-default-config_(), $config);
-  $pseudo: map-get($config, pseudo);
   $radius: map-get($config, radius);
 
-  // stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after
-  @if ($pseudo) {
-    &#{$pseudo} {
-      @include mdc-ripple-bg-base_($config);
+  @include mdc-ripple-bg-base_($config);
 
-      content: "";
-    }
-  } @else {
-    @include mdc-ripple-bg-base_($config);
-  }
-  // stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after
-
-  &.mdc-ripple-upgraded#{$pseudo} {
-    @include mdc-ripple-bg-upgraded_($radius);
+  &.mdc-ripple-upgraded {
+    @include mdc-ripple-upgraded_($radius);
   }
 
-  &.mdc-ripple-upgraded--background-focused#{$pseudo} {
+  &.mdc-ripple-upgraded--background-focused {
     @include mdc-ripple-bg-focused_;
   }
 
-  &.mdc-ripple-upgraded--background-active-fill#{$pseudo} {
+  &.mdc-ripple-upgraded--background-active-fill {
     @include mdc-ripple-bg-active-fill_;
   }
 
-  &.mdc-ripple-upgraded--unbounded#{$pseudo} {
-    @include mdc-ripple-unbounded_($radius);
+  &.mdc-ripple-upgraded--unbounded {
+    @include mdc-ripple-bg-unbounded_($radius);
   }
 }
 
@@ -297,39 +285,27 @@
 
 @mixin mdc-ripple-fg($config: ()) {
   $config: map-merge(mdc-ripple-default-config_(), $config);
-  $pseudo: map-get($config, pseudo);
   $radius: map-get($config, radius);
 
-  // stylelint-disable at-rule-empty-line-before, block-closing-brace-newline-after
-  @if ($pseudo) {
-    &#{$pseudo} {
-      @include mdc-ripple-fg-base_($config);
-      
-      content: "";
-    }
-  } @else {
-    @include mdc-ripple-fg-base_($config);
-  }
-  // stylelint-enable at-rule-empty-line-before, block-closing-brace-newline-after
-  
+  @include mdc-ripple-fg-base_($config);
 
-  &.mdc-ripple-upgraded#{$pseudo} {
+  &.mdc-ripple-upgraded {
     @include mdc-ripple-fg-upgraded_($radius);
   }
 
-  &:not(.mdc-ripple-upgraded--unbounded)#{$pseudo} {
+  &:not(.mdc-ripple-upgraded--unbounded) {
     @include mdc-ripple-fg-bounded_;
   }
 
-  &.mdc-ripple-upgraded--unbounded#{$pseudo} {
+  &.mdc-ripple-upgraded--unbounded {
     @include mdc-ripple-fg-unbounded_($radius);
   }
 
-  &.mdc-ripple-upgraded--foreground-activation#{$pseudo} {
+  &.mdc-ripple-upgraded--foreground-activation {
     @include mdc-ripple-fg-activation_;
   }
 
-  &.mdc-ripple-upgraded--foreground-deactivation#{$pseudo} {
+  &.mdc-ripple-upgraded--foreground-deactivation {
     @include mdc-ripple-fg-deactivation_;
   }
 }
