@@ -38,12 +38,12 @@
   // We simply solve this quadratic equation for the nonnegative root between [0, 1].
   // E.g. for black 12% opacity:
   // https://www.wolframalpha.com/input/?i=x+%2B+x(1+-+x)+%3D+.12,+x+%3C%3D+1,+x+%3E%3D+0
-  @include mdc-ripple-bg((pseudo: "::before", opacity: .062));
-  @include mdc-ripple-fg((pseudo: "::after", opacity: .062));
+  @include mdc-ripple-bg-before((opacity: .062));
+  @include mdc-ripple-fg-after((opacity: .062));
 
   @include mdc-theme-dark(".mdc-icon-toggle", true) {
-    @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .16));
-    @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .16));
+    @include mdc-ripple-bg-before((base-color: white, opacity: .16));
+    @include mdc-ripple-fg-after((base-color: white, opacity: .16));
   }
 
   // For some reason, GPU layer promotion makes ripples look terrible on Chrome
@@ -76,14 +76,14 @@
 
 .mdc-icon-toggle--primary {
   @include mdc-theme-prop(color, primary);
-  @include mdc-ripple-bg((pseudo: "::before", theme-style: primary, opacity: .14));
-  @include mdc-ripple-fg((pseudo: "::after", theme-style: primary, opacity: .14));
+  @include mdc-ripple-bg-before((theme-style: primary, opacity: .14));
+  @include mdc-ripple-fg-after((theme-style: primary, opacity: .14));
 }
 
 .mdc-icon-toggle--accent {
   @include mdc-theme-prop(color, secondary);
-  @include mdc-ripple-bg((pseudo: "::before", theme-style: secondary, opacity: .14));
-  @include mdc-ripple-fg((pseudo: "::after", theme-style: secondary, opacity: .14));
+  @include mdc-ripple-bg-before((theme-style: secondary, opacity: .14));
+  @include mdc-ripple-fg-after((theme-style: secondary, opacity: .14));
 }
 
 .mdc-icon-toggle--disabled {

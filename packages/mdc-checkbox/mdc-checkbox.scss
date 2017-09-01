@@ -44,8 +44,8 @@
 // postcss-bem-linter: define checkbox
 .mdc-checkbox {
   @include mdc-ripple-base;
-  @include mdc-ripple-bg((pseudo: "::before", theme-style: primary, opacity: .14));
-  @include mdc-ripple-fg((pseudo: "::after", theme-style: primary, opacity: .14));
+  @include mdc-ripple-bg-before((theme-style: primary, opacity: .14));
+  @include mdc-ripple-fg-after((theme-style: primary, opacity: .14));
 
   display: inline-block;
   position: relative;

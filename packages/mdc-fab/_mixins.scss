@@ -24,8 +24,8 @@
   $ripple-config: map-get($config, ripple-config);
 
   @if $ripple-config {
-    @include mdc-ripple-bg(map-merge((pseudo: "::before"), $ripple-config));
-    @include mdc-ripple-fg(map-merge((pseudo: "::after"), $ripple-config));
+    @include mdc-ripple-bg-before($ripple-config);
+    @include mdc-ripple-fg-after($ripple-config);
   }
 
   @if $bg-color {
