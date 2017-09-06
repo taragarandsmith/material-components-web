@@ -18,13 +18,31 @@
 @import "@material/theme/mixins";
 @import "@material/theme/variables";
 
+@mixin mdc-button-container-fill-color($color) {
+  @include mdc-theme-prop(background-color, $color);
+}
+
+@mixin mdc-button-stroke-color($color) {
+  @include mdc-theme-prop(border-color, $color);
+}
+
+@mixin mdc-button-ink-color($color) {
+  @include mdc-theme-prop(color, $color);
+}
+
+@mixin mdc-button-ripple($ripple-config) {
+  @include mdc-ripple-base;
+  @include mdc-ripple-bg(map-merge((pseudo: "::before"), $ripple-config));
+  @include mdc-ripple-fg(map-merge((pseudo: "::after"), $ripple-config));
+}
+
 @mixin mdc-button-filled_() {
   @include mdc-ripple-base;
   @include mdc-ripple-bg((pseudo: "::before", base-color: white, opacity: .32));
   @include mdc-ripple-fg((pseudo: "::after", base-color: white, opacity: .32));
   @include mdc-theme-prop(color, text-primary-on-dark);
 
-  background-color: black;
+  @include mdc-button-container-fill-color(black);
 
   @include mdc-theme-dark(".mdc-button") {
     @include mdc-ripple-base;
@@ -32,7 +50,7 @@
     @include mdc-ripple-fg((pseudo: "::after", base-color: black, opacity: .32));
     @include mdc-theme-prop(color, text-primary-on-light);
 
-    background-color: white;
+    @include mdc-button-container-fill-color(white);
 
     &:not(.mdc-ripple-upgraded) {
       -webkit-tap-highlight-color: rgba(black, .18);

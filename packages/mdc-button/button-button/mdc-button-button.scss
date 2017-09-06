@@ -1,0 +1,68 @@
+//
+// Copyright 2016 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+@import "@material/elevation/mixins";
+@import "@material/theme/mixins";
+@import "@material/theme/variables";
+
+// postcss-bem-linter: define button
+button.mdc-button {
+  background: transparent;
+  -webkit-appearance: none;
+
+  // postcss-bem-linter: ignore
+  &:focus {
+    outline: none;
+  }
+
+  fieldset:disabled &,
+  &:disabled {
+    @include mdc-button-ink-color(rgba(black, .38));
+    cursor: default;
+    pointer-events: none;
+
+    @include mdc-theme-dark(".mdc-button") {
+      @include mdc-button-ink-color(text-disabled-on-dark);
+    }
+  }
+}
+
+button.mdc-button--raised,
+button.mdc-button--unelevated {
+  fieldset:disabled &,
+  &:disabled {
+    @include mdc-elevation(0);
+    @include mdc-button-ink-color(text-primary-on-dark);
+    @include mdc-button-container-fill-color(rgba(black, .15));
+
+    @include mdc-theme-dark(".mdc-button") {
+      @include mdc-theme-prop(color, text-disabled-on-dark);
+      @include mdc-button-container-fill-color(rgba(255, 255, 255, .15));
+    }
+  }
+}
+
+button.mdc-button--stroked {
+  fieldset:disabled &,
+  &:disabled {
+    @include mdc-button-stroke-color(rgba(black, .38));
+
+    @include mdc-theme-dark(".mdc-button") {
+      @include mdc-button-stroke-color(text-disabled-on-dark);
+    }
+  }
+}
+// postcss-bem-linter: end

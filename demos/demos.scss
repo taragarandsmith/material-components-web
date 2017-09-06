@@ -24,6 +24,26 @@ $mdc-theme-primary: #212121 !default; // Grey 900
 $mdc-theme-secondary: #64dd17 !default; // Light Green A700
 
 @import "../packages/material-components-web/material-components-web";
+@import "../packages/mdc-button/mixins";
+
+button.mdc-button.purple-button:enabled, a.mdc-button.purple-button {
+  @include mdc-button-ink-color(#7b1fa2);
+  @include mdc-button-ripple((base-color: #7b1fa2, opacity: .16));
+}
+
+button.mdc-button--raised.purple-button:enabled, 
+button.mdc-button--unelevated.purple-button:enabled,
+a.mdc-button--raised.purple-button, 
+a.mdc-button--unelevated.purple-button {
+  @include mdc-button-container-fill-color(#7b1fa2);
+  @include mdc-button-ink-color(white);
+  @include mdc-button-ripple((base-color: white, opacity: .16));
+}
+
+button.mdc-button--stroked.purple-button:enabled,
+a.mdc-button--stroked.purple-button {
+  @include mdc-button-stroke-color(#7b1fa2);
+}
 
 $low-luminance-color: #3e2723;
 $high-luminance-color: #fff8e1;
