@@ -22,3 +22,9 @@
 .demo-elevation--custom-color {
   @include mdc-elevation(16, secondary);
 }
+
+#gm2 {
+  background-color: #1A73E8;
+  color: white;
+  @include mdc-elevation(6, #4285F4);
+}
